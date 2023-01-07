@@ -1,0 +1,56 @@
+/* 
+  Localizable.strings
+  Auth2FA
+
+  Created by neko Mo on 2023/1/5.
+  
+*/
+"Two Factor Authentication" = "Two Factor Authentication";
+"Light" = "Light";
+"Dark" = "Dark";
+"Auto" = "Auto";
+"Language" = "Language";
+"View" = "View";
+"Theme" = "Theme";
+"zh_Hans" = "简体中文";
+"en" = "English";
+"Confirm" = "Confirm";
+"Cancel" = "Cancel";
+"quit" = "Quit";
+"quitAppMessage" = "Quit Application?";
+"Effective time:%@s" = "effective time: %@s";
+"roundedCorners%@" = "Rounded corners %@pts";
+"deleteMessage%@" = "Are you sure you want to delete %@ ?";
+"This action cannot be undone!" = "This action cannot be undone!";
+"copyToClipboard" = "Copy to clipboard";
+"copyOTPAuthURL" = "Copy OTPauth URL";
+"enableEditing" = "Enable editing";
+"enableDelete" = "Enable delete";
+"showVerificationCode" = "Show verification code";
+"generateQRCode" = "Generate QR Code";
+"showTimeRemaining" = "Show time remaining";
+"Popover" = "Popover";
+"MenuBarExtra" = "MenuBar";
+"Window" = "Window";
+"verificationCode" = "Code";
+"scanCode" = "Scan";
+"readQRCode" = "read QR code";
+"secret" = "Secret Key";
+"remark" = "Remark";
+"issuer" = "Issuer";
+"period" = "Period";
+"factor" = "Factor";
+"digits" = "Digits";
+"counter" = "Counter";
+"otpauthUrl" = "otpauth://[Factor]/[Issuer]?secret=[Secret]&period=[Period]&remark=[Remark]&algorithm=[Algorithm]";
+"add" = "Add to";
+"addSuccessfully" = "Added successfully!";
+"failedToReadFile" = "Failed to read file!";
+"noQRcode" = "No QR code!!";
+"theQRcodeIsInvalid" = "The QR code is invalid!";
+"invalidImage" = "Invalid image!";
+
+"inputIsInvalid"= "Input is invalid!";
+"wrongWrong" = "Wrong! Wrong!";
+"notAValidImage" = "Not a valid image!";
+"unableToFetchSelectedItem" = "Unable to fetch selected item!";
