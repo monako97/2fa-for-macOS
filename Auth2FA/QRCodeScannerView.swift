@@ -77,6 +77,8 @@ struct QRCodeScannerView: View {
                     }
                     Divider().frame(height: 14)
                     TextField("issuer", text: $addModel.issuer)
+                    Text(Iconfont(rawValue: addModel.issuer.lowercased())?.icon ?? Iconfont.gitlab.icon)
+                        .font(.iconfont(size: 18))
                 }
                 Divider()
                 SegmentedControlView(tabs: addModel.algorithmOption, currentTab: $addModel.algorithm)

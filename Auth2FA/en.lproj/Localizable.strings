@@ -8,7 +8,7 @@
 "Two Factor Authentication" = "Two Factor Authentication";
 "Light" = "Light";
 "Dark" = "Dark";
-"Auto" = "Auto";
+"Auto" = "System";
 "Language" = "Language";
 "View" = "View";
 "Theme" = "Theme";
@@ -32,6 +32,8 @@
 "Popover" = "Popover";
 "MenuBarExtra" = "MenuBar";
 "Window" = "Window";
+"copySuccessfully" = "Copy Successfully";
+"copyFailed" = "Failed to generate verification code";
 "verificationCode" = "Code";
 "scanCode" = "Scan";
 "readQRCode" = "read QR code";

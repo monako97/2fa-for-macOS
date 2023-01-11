@@ -14,6 +14,9 @@ struct Auth2FAApp: App {
      @AppStorage("statusMenu") var statusMenu: StatusMenu = .popover
      @AppStorage("locale") var locale: Localication = .unspecified
      
+     init() {
+          FontRegistering.register()
+     }
      var body: some Scene {
           MenuBarExtra("MenuBarExtra", systemImage: "key.horizontal.fill", isInserted: $showMenuBarExtra) {
                AppMain()
@@ -78,7 +81,6 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
           }
      }
      func applicationDidUpdate(_ notification: Notification) {
-          let activationPolicy = NSApp.activationPolicy()
           if self.statusMenu == .popover {
                if self.statusItem == nil {
                     self.setUpMenu()
@@ -94,6 +96,10 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
                     }
                }
           }
+          toggleActivationPolicy()
+     }
+     func toggleActivationPolicy() {
+          let activationPolicy = NSApp.activationPolicy()
           if self.statusMenu == .window {
                if (activationPolicy != .regular) {
                     NSApp.setActivationPolicy(.regular)

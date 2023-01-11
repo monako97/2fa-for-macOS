@@ -46,9 +46,9 @@ class SettingModel: ObservableObject {
         TabObject(label: "Auto", key: .unspecified, icon: "apple.logo")
     ]
     let locales: [TabObject<Localication>] = [
-        TabObject(label: "zh_Hans", key: .zh_Hans, icon: "character.bubble.zh", activeIcon: "character.bubble.fill.zh"),
-        TabObject(label: "en", key: .en, icon: "character.bubble", activeIcon: "character.bubble.fill"),
-        TabObject(label: "Auto", key: .unspecified, icon: "character.bubble", activeIcon: "character.bubble.fill")
+        TabObject(label: "zh_Hans", key: .zh_Hans, icon: "textformat.size.zh"),
+        TabObject(label: "en", key: .en, icon: "textformat"),
+        TabObject(label: "Auto", key: .unspecified, icon: "textformat.size")
     ]
     
     @AppStorage("locale") var locale: Localication = .unspecified

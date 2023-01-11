@@ -6,13 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
-import CryptoKit
-struct Route: Identifiable {
-    let id = UUID()
-    let label: String
-    let key: String
-}
 
 struct HomeView: View {
     @EnvironmentObject private var addModel: AddModel
@@ -77,7 +70,8 @@ struct HomeView: View {
                 }
                 Spacer()
                 IconButton(
-                    icon: Image(systemName: "power"),
+                    icon: Image(systemName: "xmark.circle"),
+                    hoverIcon: Image(systemName: "xmark.circle.fill"),
                     action: {
                         self.showExit = true
                     })

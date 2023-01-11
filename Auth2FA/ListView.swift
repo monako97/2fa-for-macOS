@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ListView: View {
     @FetchRequest(
-        sortDescriptors: [],
-        animation: .default)
-    private var items: FetchedResults<Item>
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.objectID, ascending: false)],
+        animation: .default
+    ) private var items: FetchedResults<Item>
     
     var body: some View {
         ScrollView {

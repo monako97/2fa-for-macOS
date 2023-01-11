@@ -33,7 +33,8 @@
 "Popover" = "气泡弹窗";
 "MenuBarExtra" = "扩展菜单";
 "Window" = "窗口";
-"Copy successfully" = "拷贝成功";
+"copySuccessfully" = "拷贝成功";
+"copyFailed" = "无法生成验证码";
 "edit" = "编辑";
 "verificationCode" = "验证码";
 "scanCode" = "扫码";

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ModalView<MessageView: View>: View {
     @Environment(\.presentationMode) var presentation
