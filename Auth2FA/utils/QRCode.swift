@@ -7,31 +7,25 @@
 
 import Foundation
 import CoreImage.CIFilterBuiltins
-import AppKit
 
-let context = CIContext()
+let context: CIContext = CIContext()
 let filter = CIFilter.qrCodeGenerator()
 
-func generateQRCode(from string: String, size: CGFloat) -> NSImage {
-    filter.setValue(Data(string.utf8), forKey: "inputMessage")
-
+func generateQRCode(_ from: String, _ size: CGFloat) -> CGImage? {
+    filter.setValue(Data(from.utf8), forKey: "inputMessage")
     if let outputImage = filter.outputImage {
         let extent = outputImage.extent.integral
         let scale = min(size / extent.width, size / extent.height)
         /// Create bitmap
-        let width: size_t = size_t(extent.width * scale)
-        let height: size_t = size_t(extent.height * scale)
-        let cs: CGColorSpace = CGColorSpaceCreateDeviceGray()
-        let bitmap: CGContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: cs, bitmapInfo: 1)!
-        ///
-        let context = CIContext.init()
-        let bitmapImage = context.createCGImage(outputImage, from: extent)
-        bitmap.interpolationQuality = .none
-        bitmap.scaleBy(x: scale, y: scale)
-        bitmap.draw(bitmapImage!, in: extent)
+        let bitmap = CGContext(data: nil, width: size_t(extent.width * scale), height: size_t(extent.height * scale), bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: 1)
+        if let bitmap = bitmap {
+            bitmap.interpolationQuality = .none
+            bitmap.scaleBy(x: scale, y: scale)
+            bitmap.draw(context.createCGImage(outputImage, from: extent)!, in: extent)
             
-        let scaledImage = bitmap.makeImage()
-        return NSImage(cgImage: scaledImage!, size: NSSize(width: size, height: size))
+            return bitmap.makeImage()
+        }
+        return nil
     }
-    return NSImage()
+    return nil
 }

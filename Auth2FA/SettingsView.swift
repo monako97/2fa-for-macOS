@@ -8,46 +8,45 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var settingModel: SettingModel
+    @EnvironmentObject var setting: SettingModel
     
     var body: some View {
         Form {
             Group {
                 LabeledContent(content: {
-                    SegmentedControlView(tabs: settingModel.locales, currentTab: $settingModel.locale)
+                    SegmentedControlView(locales, $setting.locale)
                 }, label: {
-                    Text("Language")
+                    Text("language")
                 })
                 LabeledContent(content: {
-                    SegmentedControlView(tabs: settingModel.statusMenuType, currentTab: $settingModel.statusMenu)
+                    SegmentedControlView(sceneModes, $setting.sceneMode)
                 }, label: {
-                    Text("View")
+                    Text("view")
                 })
                 LabeledContent(content: {
-                    SegmentedControlView(tabs: settingModel.themes, currentTab: $settingModel.theme)
+                    SegmentedControlView(themes, $setting.theme)
                 }, label: {
-                    Text("Theme")
+                    Text("theme")
                 })
                 HStack (alignment: .lastTextBaseline) {
-                    Slider(value: $settingModel.radius, in: 0...50) {
-                        Text("roundedCorners\(Text("\(settingModel.radius, specifier: "%.0f")"))")
+                    Slider(value: $setting.radius, in: 0...50) {
+                        Text("roundedCorners\(Text("\(setting.radius, specifier: "%.0f")"))")
                     }
-                    IconButton(
-                        icon: Image(systemName: "arrow.triangle.2.circlepath"),
-                        action: {
-                            settingModel.radius = 8.0
+                    IconButton<Image>("arrow.triangle.2.circlepath",
+                        {
+                            setting.radius = 8.0
                         }
                     )
                 }
             }
             .labeledContentStyle(.vertical)
             LazyVGrid(columns: [GridItem(.flexible())], alignment: .listRowSeparatorTrailing){
-                Toggle("showTimeRemaining", isOn: $settingModel.showTimeRemaining)
-                Toggle("generateQRCode", isOn: $settingModel.enableShowQRCode)
-                Toggle("showVerificationCode", isOn: $settingModel.showCode)
-                Toggle("enableDelete", isOn: $settingModel.enableDelete)
-                Toggle("enableEditing", isOn: $settingModel.enableEdit)
-                Toggle("copyToClipboard", isOn: $settingModel.enableClipBoard)
+                Toggle("showTimeRemaining", isOn: $setting.showTimeRemaining)
+                Toggle("generateQRCode", isOn: $setting.enableShowQRCode)
+                Toggle("showVerificationCode", isOn: $setting.showCode)
+                Toggle("enableDelete", isOn: $setting.enableDelete)
+                Toggle("enableEditing", isOn: $setting.enableEdit)
+                Toggle("copyToClipboard", isOn: $setting.enableClipBoard)
             }
             .labeledContentStyle(.reverse)
             .frame(width: 300, height: 200)
@@ -56,7 +55,7 @@ struct SettingsView: View {
         .toggleStyle(.switch)
         .buttonStyle(.plain)
         .background(.ultraThinMaterial)
-        .environment(\.locale, .init(identifier: getLocale(locale: settingModel.locale)))
+        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 

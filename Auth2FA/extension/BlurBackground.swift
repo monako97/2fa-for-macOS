@@ -18,7 +18,7 @@ struct BlurBackground: NSViewRepresentable {
         return blurView;
     }
     func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
-        NSLog("updateNSView")
+//        NSLog("updateNSView")
     }
     func test() -> some View {
         return self

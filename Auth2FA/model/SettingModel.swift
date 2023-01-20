@@ -7,13 +7,10 @@
 
 import SwiftUI
 
-enum SettingViewTab: String, CaseIterable {
-    case general, theme
-}
 enum AppColorScheme: String, CaseIterable {
     case dark, light, unspecified
 }
-enum StatusMenu: String, CaseIterable {
+enum SceneMode: String, CaseIterable {
     case popover, menuBarExtra, window
 }
 enum Localication: String, CaseIterable {
@@ -34,28 +31,39 @@ func getLocale(locale: Localication) -> String {
     }
     return locale.rawValue
 }
-class SettingModel: ObservableObject {
-    let statusMenuType: [TabObject<StatusMenu>] = [
-        TabObject(label: "Popover", key: .popover, icon: "bubble.middle.top", activeIcon: "bubble.middle.top.fill"),
-        TabObject(label: "MenuBarExtra", key: .menuBarExtra, icon: "menubar.arrow.down.rectangle", activeIcon: "menubar.dock.rectangle"),
-        TabObject(label: "Window", key: .window, icon: "macwindow")
-    ]
-    let themes: [TabObject<AppColorScheme>] = [
-        TabObject(label: "Light", key: .light, icon: "sun.min", activeIcon: "sun.min.fill"),
-        TabObject(label: "Dark", key: .dark, icon: "moon.stars", activeIcon: "moon.stars.fill"),
-        TabObject(label: "Auto", key: .unspecified, icon: "apple.logo")
-    ]
-    let locales: [TabObject<Localication>] = [
-        TabObject(label: "zh_Hans", key: .zh_Hans, icon: "textformat.size.zh"),
-        TabObject(label: "en", key: .en, icon: "textformat"),
-        TabObject(label: "Auto", key: .unspecified, icon: "textformat.size")
-    ]
-    
+
+func getColorSchema(theme: AppColorScheme) -> ColorScheme? {
+    switch theme {
+        case .dark:
+            return .dark
+        case .light:
+            return.light
+        default:
+            return nil
+    }
+}
+
+let sceneModes: [TabObject<SceneMode>] = [
+    TabObject("popover", .popover, "bubble.middle.top", "bubble.middle.top.fill"),
+    TabObject("menuBarExtra", .menuBarExtra, "menubar.arrow.down.rectangle", "menubar.dock.rectangle"),
+    TabObject("window", .window, "macwindow")
+]
+let themes: [TabObject<AppColorScheme>] = [
+    TabObject("light", .light, "sun.min", "sun.min.fill"),
+    TabObject("dark", .dark, "moon.stars", "moon.stars.fill"),
+    TabObject("auto", .unspecified, "apple.logo")
+]
+let locales: [TabObject<Localication>] = [
+    TabObject("zh_Hans", .zh_Hans, "textformat.size.zh"),
+    TabObject("en", .en, "textformat"),
+    TabObject("auto", .unspecified, "textformat.size")
+]
+final class SettingModel: NSObject, ObservableObject {
     @AppStorage("locale") var locale: Localication = .unspecified
     @AppStorage("showMenuBarExtra") var showMenuBarExtra: Bool = false
-    @AppStorage("statusMenu") var statusMenu: StatusMenu = .popover {
+    @AppStorage("sceneMode") var sceneMode: SceneMode = .popover {
         didSet {
-            self.showMenuBarExtra = statusMenu == .menuBarExtra
+            self.showMenuBarExtra = sceneMode == .menuBarExtra
         }
     }
     @AppStorage("radius") var radius = 8.0
@@ -65,17 +73,5 @@ class SettingModel: ObservableObject {
     @AppStorage("enableShowQRCode") var enableShowQRCode = true
     @AppStorage("enableEdit") var enableEdit = true
     @AppStorage("showCode") var showCode = true
-    @AppStorage("settingViewActiveTab") var activeTab: SettingViewTab = .general
     @AppStorage("theme") var theme: AppColorScheme = .unspecified
-}
-
-func getColorSchema(theme: AppColorScheme) -> ColorScheme? {
-     switch theme {
-          case .dark:
-               return .dark
-          case .light:
-               return.light
-          default:
-               return nil
-     }
 }

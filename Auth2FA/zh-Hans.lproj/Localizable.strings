@@ -7,22 +7,21 @@
 */
 
 "Two Factor Authentication" = "双因素认证(2FA)";
-"Light" = "浅色";
-"Dark" = "深色";
-"Auto" = "跟随系统";
-"Language" = "语言";
-"View" = "视图";
-"Theme" = "主题";
+"light" = "浅色";
+"dark" = "深色";
+"auto" = "跟随系统";
+"language" = "语言";
+"view" = "视图";
+"theme" = "主题";
 "zh_Hans" = "简体中文";
 "en" = "English";
-"Confirm" = "确认";
-"Cancel" = "取消";
+"confirm" = "确认";
+"cancel" = "取消";
 "quit" = "退出";
 "quitAppMessage" = "退出应用程序?";
-"Effective time:%@s" = "有效时间: %@s";
 "deleteMessage%@" = "您确认要删除 %@ 吗 ?";
 "roundedCorners%@" = "圆角 %@pts";
-"This action cannot be undone!" = "此操作无法撤销!";
+"thisActionCannotBeUndone" = "此操作无法撤销!";
 "copyToClipboard" = "拷贝到剪切板";
 "copyOTPAuthURL" = "拷贝 OTPauth 链接";
 "enableEditing" = "启用编辑";
@@ -30,9 +29,9 @@
 "showVerificationCode" = "显示验证码";
 "generateQRCode" = "生成二维码";
 "showTimeRemaining" = "显示剩余时间";
-"Popover" = "气泡弹窗";
-"MenuBarExtra" = "扩展菜单";
-"Window" = "窗口";
+"popover" = "气泡弹窗";
+"menuBarExtra" = "扩展菜单";
+"window" = "窗口";
 "copySuccessfully" = "拷贝成功";
 "copyFailed" = "无法生成验证码";
 "edit" = "编辑";
@@ -46,9 +45,11 @@
 "factor" = "因子";
 "digits" = "位数";
 "counter" = "计数";
+"icon" = "图标";
+"clear" = "清除";
 "otpauthUrl" = "otpauth://[协议]/[发行人]?secret=[密钥]&period=[周期]&remark=[备注]&algorithm=[算法]";
 "add" = "添加";
-"addSuccessfully" = "添加成功!";
+"addSuccess" = "添加成功!";
 "failedToReadFile" = "读取文件失败!";
 "noQRcode" = "未识别到有效的二维码!";
 "theQRcodeIsInvalid" = "二维码无效!";

@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct IconButton<IconView: View>: View {
-    let icon: IconView
-    let hoverIcon: IconView
-    let action: () -> ()
     @State var isHovered: Bool = false
-    
-    init(icon: IconView, hoverIcon: IconView? = nil, action: (() -> ())? = nil) {
-        self.icon = icon
-        self.hoverIcon = hoverIcon ?? icon
-        self.action = action ?? {}
+    let option: (icon: IconView, hoverIcon: IconView, action: () -> Void)
+    init(_ icon: IconView, _ hoverIcon: IconView? = nil, action: (() -> ())? = nil) {
+        self.option = (icon, hoverIcon ?? icon, action ?? {})
     }
-    
+    init(_ icon: IconView, action: (() -> ())? = nil) {
+        self.option = (icon, icon, action ?? {})
+    }
+    init(_ icon: String,_ hoverIcon: String? = nil, _ action: (() -> ())? = nil) {
+        self.option = (Image(systemName: icon) as! IconView,Image(systemName: hoverIcon ?? icon) as! IconView,action ?? {})
+    }
+    init(_ icon: String, _ action: (() -> ())? = nil) {
+        self.option = (Image(systemName: icon) as! IconView,Image(systemName: icon) as! IconView,action ?? {})
+    }
     var body: some View {
-        Button(action: action, label: {
-            if isHovered == true {
-                hoverIcon.foregroundColor(isHovered ? .accentColor : .primary)
+        Button(action: option.action, label: {
+            if isHovered {
+                option.hoverIcon.foregroundColor(isHovered ? .accentColor : .primary)
             } else {
-                icon
+                option.icon
             }
         })
         .onHover{ isHovered in
@@ -37,10 +40,6 @@ struct IconButton<IconView: View>: View {
 
 struct IconButton_Previews: PreviewProvider {
     static var previews: some View {
-        IconButton(
-            icon: Image(systemName: "power.circle"),
-            hoverIcon: Image(systemName: "power.circle.fill"),
-            action: {}
-        )
+        IconButton(Image(systemName: "power.circle"), Image(systemName: "power.circle.fill"), action: {})
     }
 }

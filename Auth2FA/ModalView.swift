@@ -9,28 +9,19 @@ import SwiftUI
 
 struct ModalView<MessageView: View>: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var settingModel: SettingModel
-    let message: () -> MessageView
-    let destructive: () -> ()
-    let secondaryMessage: String?
-    let alignment: VerticalAlignment
-    let okText: String
-    let cancelText: String
+    @EnvironmentObject var setting: SettingModel
+    let option: (message: MessageView, secondaryMessage: String?, alignment: VerticalAlignment, okText: String, cancelText: String, destructive: () -> Void)
     
-    init(message: @escaping () -> MessageView, destructive: @escaping () -> Void, secondaryMessage: String? = nil, alignment: VerticalAlignment = .center, okText: String = "Confirm", cancelText: String = "Cancel") {
-        self.message = message
-        self.destructive = destructive
-        self.secondaryMessage = secondaryMessage
-        self.alignment = alignment
-        self.okText = okText
-        self.cancelText = cancelText
+    init(_ message: MessageView, _ secondaryMessage: String? = nil, alignment: VerticalAlignment = .center, okText: String = "confirm", cancelText: String = "cancel", destructive: @escaping () -> Void) {
+        self.option = (message, secondaryMessage, alignment, okText, cancelText, destructive)
     }
+    
     
     var body: some View {
         VStack (spacing: 0) {
-            self.message()
-            if self.secondaryMessage != nil {
-                Text(LocalizedStringKey(self.secondaryMessage!))
+            option.message
+            if option.secondaryMessage != nil {
+                Text(LocalizedStringKey(option.secondaryMessage!))
                     .foregroundColor(.primary.opacity(0.6))
                     .font(Font.system(size: 12))
                     .padding(.horizontal, 20)
@@ -40,16 +31,17 @@ struct ModalView<MessageView: View>: View {
                 Button(action: {
                     self.presentation.wrappedValue.dismiss()
                 }, label: {
-                    Text(LocalizedStringKey(self.cancelText))
+                    Text(LocalizedStringKey(option.cancelText))
                         .padding(.vertical, 6)
                         .padding(.horizontal, 20)
+                        .background(Color.accentColor.opacity(0.1))
                         .onHoverStyle()
                 })
                 Button(action: {
                     self.presentation.wrappedValue.dismiss()
-                    self.destructive()
+                    self.option.destructive()
                 }, label: {
-                    Text(LocalizedStringKey(self.okText))
+                    Text(LocalizedStringKey(option.okText))
                         .padding(.vertical, 6)
                         .padding(.horizontal, 20)
                         .foregroundColor(.white)
@@ -61,15 +53,12 @@ struct ModalView<MessageView: View>: View {
             .padding(.bottom, 20)
             .buttonStyle(.plain)
         }
-        .blurBackground()
-        .environment(\.locale, .init(identifier: getLocale(locale: settingModel.locale)))
+        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 
 struct ModalView_Previews: PreviewProvider {
     static var previews: some View {
-        ModalView(message: {
-            Text("hellow")
-        }, destructive: {})
+        ModalView(Text("hellow"), destructive: {})
     }
 }

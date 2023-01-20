@@ -8,23 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		471403BA295C41E8004ACA85 /* OnHoverStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471403B9295C41E8004ACA85 /* OnHoverStyle.swift */; };
-		471403C0295D44B8004ACA85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471403BF295D44B8004ACA85 /* Color.swift */; };
-		47283B25296AA99A007E2D1E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47283B23296AA970007E2D1E /* CloudKit.framework */; };
 		472ED7C82966CC3D00727772 /* LabeledContentStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7C72966CC3D00727772 /* LabeledContentStyle.swift */; };
 		472ED7CA2967FF3A00727772 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7C92967FF3A00727772 /* Data.swift */; };
 		472ED7CC2967FF6700727772 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7CB2967FF6700727772 /* Array.swift */; };
 		472ED7CE2968013C00727772 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7CD2968013C00727772 /* Int.swift */; };
-		472ED7D02968565D00727772 /* EditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7CF2968565D00727772 /* EditModel.swift */; };
 		472ED7D229695CFF00727772 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7D129695CFF00727772 /* RingView.swift */; };
 		473C70722966A5D0005A91A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 473C70742966A5D0005A91A0 /* Localizable.strings */; };
+		4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4778AA9529791B9F0001134E /* GridPickerView.swift */; };
 		477C6568296B0ADB00A01DDE /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477C6567296B0ADB00A01DDE /* Font.swift */; };
-		4795E729295E867E006294F8 /* ClipBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4795E728295E867E006294F8 /* ClipBoard.swift */; };
 		47AF9BFE2943954B00E6E165 /* Auth2FAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */; };
 		47AF9C022943954B00E6E165 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AF9C012943954B00E6E165 /* Assets.xcassets */; };
 		47AF9C102943954B00E6E165 /* Auth2FATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9C0F2943954B00E6E165 /* Auth2FATests.swift */; };
 		47AF9C1A2943954B00E6E165 /* Auth2FAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9C192943954B00E6E165 /* Auth2FAUITests.swift */; };
 		47AF9C1C2943954B00E6E165 /* Auth2FAUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9C1B2943954B00E6E165 /* Auth2FAUITestsLaunchTests.swift */; };
 		47AF9C2A29439FF300E6E165 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9C2929439FF300E6E165 /* HomeView.swift */; };
+		47C1A50B2973D28800B8AFB4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C1A50A2973D28800B8AFB4 /* CloudKit.framework */; };
+		47C1A50D2974167100B8AFB4 /* CancelAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A50C2974167100B8AFB4 /* CancelAll.swift */; };
+		47C1A5112974291000B8AFB4 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A5102974291000B8AFB4 /* TimeModel.swift */; };
 		47DA8E06296BB4B400CD9696 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47DA8E05296BB4B400CD9696 /* iconfont.ttf */; };
 		47DA8E0A296BFDD200CD9696 /* FontRegistering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA8E09296BFDD200CD9696 /* FontRegistering.swift */; };
 		47E7D444295F4A220075833E /* Auth2FA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D442295F4A220075833E /* Auth2FA.xcdatamodeld */; };
@@ -32,8 +32,7 @@
 		47E7D44C296045210075833E /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D44B296045210075833E /* ModalView.swift */; };
 		47E7D44E2960473E0075833E /* CodeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D44D2960473E0075833E /* CodeItemView.swift */; };
 		47E7D452296058C50075833E /* IconButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D451296058C50075833E /* IconButtonView.swift */; };
-		47E7D4552960774F0075833E /* AddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D4542960774F0075833E /* AddModel.swift */; };
-		47E7D45729607D160075833E /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D45629607D160075833E /* HomeModel.swift */; };
+		47E7D4552960774F0075833E /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D4542960774F0075833E /* AppModel.swift */; };
 		47E7D459296088470075833E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D458296088470075833E /* ToastView.swift */; };
 		47E7D45D2960D4070075833E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D45C2960D4070075833E /* SettingsView.swift */; };
 		47E7D45F29616EFF0075833E /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D45E29616EFF0075833E /* SettingModel.swift */; };
@@ -66,19 +65,16 @@
 
 /* Begin PBXFileReference section */
 		471403B9295C41E8004ACA85 /* OnHoverStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHoverStyle.swift; sourceTree = "<group>"; };
-		471403BF295D44B8004ACA85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		47283B23296AA970007E2D1E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		472ED7C72966CC3D00727772 /* LabeledContentStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContentStyle.swift; sourceTree = "<group>"; };
 		472ED7C92967FF3A00727772 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		472ED7CB2967FF6700727772 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		472ED7CD2968013C00727772 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		472ED7CF2968565D00727772 /* EditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModel.swift; sourceTree = "<group>"; };
 		472ED7D129695CFF00727772 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		473C70732966A5D0005A91A0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		473C70752966A5D9005A91A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4778AA9529791B9F0001134E /* GridPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPickerView.swift; sourceTree = "<group>"; };
 		477C6567296B0ADB00A01DDE /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		477C6569296B12FE00A01DDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4795E728295E867E006294F8 /* ClipBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipBoard.swift; sourceTree = "<group>"; };
 		47AF9BFA2943954B00E6E165 /* Auth2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auth2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Auth2FAApp.swift; sourceTree = "<group>"; };
 		47AF9C012943954B00E6E165 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +86,9 @@
 		47AF9C192943954B00E6E165 /* Auth2FAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FAUITests.swift; sourceTree = "<group>"; };
 		47AF9C1B2943954B00E6E165 /* Auth2FAUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FAUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		47AF9C2929439FF300E6E165 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		47C1A50A2973D28800B8AFB4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		47C1A50C2974167100B8AFB4 /* CancelAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAll.swift; sourceTree = "<group>"; };
+		47C1A5102974291000B8AFB4 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
 		47DA8E05296BB4B400CD9696 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		47DA8E09296BFDD200CD9696 /* FontRegistering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRegistering.swift; sourceTree = "<group>"; };
 		47E7D443295F4A220075833E /* Auth2FA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Auth2FA.xcdatamodel; sourceTree = "<group>"; };
@@ -97,8 +96,7 @@
 		47E7D44B296045210075833E /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		47E7D44D2960473E0075833E /* CodeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeItemView.swift; sourceTree = "<group>"; };
 		47E7D451296058C50075833E /* IconButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonView.swift; sourceTree = "<group>"; };
-		47E7D4542960774F0075833E /* AddModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModel.swift; sourceTree = "<group>"; };
-		47E7D45629607D160075833E /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		47E7D4542960774F0075833E /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		47E7D458296088470075833E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		47E7D45C2960D4070075833E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		47E7D45E29616EFF0075833E /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -117,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47283B25296AA99A007E2D1E /* CloudKit.framework in Frameworks */,
+				47C1A50B2973D28800B8AFB4 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,18 +136,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		47283B22296AA970007E2D1E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				47283B23296AA970007E2D1E /* CloudKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		472ED7D42969B71F00727772 /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				471403BF295D44B8004ACA85 /* Color.swift */,
 				471403B9295C41E8004ACA85 /* OnHoverStyle.swift */,
 				47FBA536295DD66D009AEECA /* String.swift */,
 				47E7D458296088470075833E /* ToastView.swift */,
@@ -160,6 +149,7 @@
 				472ED7CD2968013C00727772 /* Int.swift */,
 				477C6567296B0ADB00A01DDE /* Font.swift */,
 				47DA8E09296BFDD200CD9696 /* FontRegistering.swift */,
+				47C1A50C2974167100B8AFB4 /* CancelAll.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -168,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				47FBA532295DD5A9009AEECA /* OTP.swift */,
-				4795E728295E867E006294F8 /* ClipBoard.swift */,
 				47EE4F1C2962F4F40071ED4F /* QRCode.swift */,
 			);
 			path = utils;
@@ -181,7 +170,7 @@
 				47AF9C0E2943954B00E6E165 /* Auth2FATests */,
 				47AF9C182943954B00E6E165 /* Auth2FAUITests */,
 				47AF9BFB2943954B00E6E165 /* Products */,
-				47283B22296AA970007E2D1E /* Frameworks */,
+				47C1A5092973D28800B8AFB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -218,6 +207,7 @@
 				473C70742966A5D0005A91A0 /* Localizable.strings */,
 				472ED7D129695CFF00727772 /* RingView.swift */,
 				47DA8E05296BB4B400CD9696 /* iconfont.ttf */,
+				4778AA9529791B9F0001134E /* GridPickerView.swift */,
 			);
 			path = Auth2FA;
 			sourceTree = "<group>";
@@ -247,13 +237,20 @@
 			path = Auth2FAUITests;
 			sourceTree = "<group>";
 		};
+		47C1A5092973D28800B8AFB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47C1A50A2973D28800B8AFB4 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		47E7D453296077250075833E /* model */ = {
 			isa = PBXGroup;
 			children = (
-				47E7D4542960774F0075833E /* AddModel.swift */,
-				47E7D45629607D160075833E /* HomeModel.swift */,
+				47E7D4542960774F0075833E /* AppModel.swift */,
 				47E7D45E29616EFF0075833E /* SettingModel.swift */,
-				472ED7CF2968565D00727772 /* EditModel.swift */,
+				47C1A5102974291000B8AFB4 /* TimeModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -401,22 +398,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				47DA8E0A296BFDD200CD9696 /* FontRegistering.swift in Sources */,
+				47C1A50D2974167100B8AFB4 /* CancelAll.swift in Sources */,
+				47C1A5112974291000B8AFB4 /* TimeModel.swift in Sources */,
 				472ED7D229695CFF00727772 /* RingView.swift in Sources */,
 				47E7D461296183900075833E /* BlurBackground.swift in Sources */,
 				477C6568296B0ADB00A01DDE /* Font.swift in Sources */,
+				4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */,
 				47E7D45F29616EFF0075833E /* SettingModel.swift in Sources */,
 				47E7D459296088470075833E /* ToastView.swift in Sources */,
 				472ED7CE2968013C00727772 /* Int.swift in Sources */,
 				47EE4F1B2962C1840071ED4F /* Auth2FAManaged.swift in Sources */,
 				47FBA52F295DA9B4009AEECA /* SegmentedControlView.swift in Sources */,
 				47E7D44C296045210075833E /* ModalView.swift in Sources */,
-				472ED7D02968565D00727772 /* EditModel.swift in Sources */,
 				47AF9C2A29439FF300E6E165 /* HomeView.swift in Sources */,
-				4795E729295E867E006294F8 /* ClipBoard.swift in Sources */,
 				47E7D452296058C50075833E /* IconButtonView.swift in Sources */,
 				472ED7CC2967FF6700727772 /* Array.swift in Sources */,
 				47E7D446295F4D460075833E /* Persistence.swift in Sources */,
-				47E7D45729607D160075833E /* HomeModel.swift in Sources */,
 				47E7D444295F4A220075833E /* Auth2FA.xcdatamodeld in Sources */,
 				47FBA52D295DA894009AEECA /* ListView.swift in Sources */,
 				47FBA537295DD66D009AEECA /* String.swift in Sources */,
@@ -428,8 +425,7 @@
 				47AF9BFE2943954B00E6E165 /* Auth2FAApp.swift in Sources */,
 				472ED7CA2967FF3A00727772 /* Data.swift in Sources */,
 				47FBA533295DD5A9009AEECA /* OTP.swift in Sources */,
-				471403C0295D44B8004ACA85 /* Color.swift in Sources */,
-				47E7D4552960774F0075833E /* AddModel.swift in Sources */,
+				47E7D4552960774F0075833E /* AppModel.swift in Sources */,
 				47E7D45D2960D4070075833E /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,7 +600,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 28;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -621,7 +617,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneko.auth2fa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -642,7 +638,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 28;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -659,7 +655,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneko.auth2fa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;

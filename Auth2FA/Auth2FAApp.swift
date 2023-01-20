@@ -11,130 +11,133 @@ import SwiftUI
 struct Auth2FAApp: App {
      @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
      @AppStorage("showMenuBarExtra") var showMenuBarExtra: Bool = false
-     @AppStorage("statusMenu") var statusMenu: StatusMenu = .popover
+     @AppStorage("sceneMode") var sceneMode: SceneMode = .popover
      @AppStorage("locale") var locale: Localication = .unspecified
      
      init() {
           FontRegistering.register()
      }
      var body: some Scene {
-          MenuBarExtra("MenuBarExtra", systemImage: "key.horizontal.fill", isInserted: $showMenuBarExtra) {
-               AppMain()
-                    .frame(width: 300, height: 575)
+          MenuBarExtra("menuBarExtra", systemImage: "key.horizontal.fill", isInserted: $showMenuBarExtra) {
+               HomeView()
+                    .frame(width: 300, height: 590)
+                    .environment(\.managedObjectContext, delegate.viewContext)
+                    .environmentObject(delegate.appModel)
+                    .environmentObject(delegate.settingModel)
+                    .environmentObject(delegate.timeModel)
           }
           .menuBarExtraStyle(.window)
-//          #if os(macOS)
-//          Settings {
-//               SettingsView()
-//                    .environmentObject(settingModel)
-//                    .blurBackground()
-//          }
-//          #endif
           WindowGroup {
-               if statusMenu == .window {
+               if sceneMode == .window {
                     VStack (spacing: 0) {
-                         Text("Two Factor Authentication")
-                              .foregroundColor(.secondary)
-                              .font(.system(size: 13, weight: .bold))
-                              .frame(width: 300)
-                              .padding(.top, 34 )
-                              .blurBackground()
-                         AppMain()
-                              .frame(width: 300, height: 568)
+                         HStack {
+                              Spacer()
+                              Text("Two Factor Authentication")
+                              Spacer()
+                         }
+                         .foregroundColor(.secondary)
+                         .font(.system(size: 13, weight: .bold))
+                         .padding(.top, 5 )
+                         .blurBackground()
+                         HomeView()
                               .blurBackground()
                     }
-                    .frame(width: 300, height: 560)
+                    .frame(minWidth: 300, idealWidth: 300, minHeight: 565)
                     .ignoresSafeArea()
                     .environment(\.locale, .init(identifier: getLocale(locale: locale)))
+                    .environment(\.managedObjectContext, delegate.viewContext)
+                    .environmentObject(delegate.appModel)
+                    .environmentObject(delegate.settingModel)
+                    .environmentObject(delegate.timeModel)
                }
           }
+          .onChange(of: sceneMode, perform: { newSceneMode in
+               NSApp.setActivationPolicy(newSceneMode == .window ? .regular : .accessory)
+               if newSceneMode == .popover {
+                    if delegate.statusItem == nil {
+                         delegate.setUpMenu()
+                    } else if let statusItem = delegate.statusItem {
+                         statusItem.isVisible = true
+                    }
+               } else if (delegate.popover != nil && delegate.popover.isShown) {
+                    delegate.popover.close()
+                    delegate.statusItem?.isVisible = false
+               }
+          })
           .windowResizability(.contentSize)
           .windowToolbarStyle(.unifiedCompact(showsTitle: false))
           .windowStyle(.hiddenTitleBar)
      }
 }
 
-struct AppMain: View {
-     let persistenceController = PersistenceController.shared
-     let addModel = AddModel()
-     let homeModel = HomeModel()
-     let settingModel = SettingModel()
-     let editModel = EditModel()
-     var body: some View {
-          HomeView()
-               .environment(\.locale, .init(identifier: getLocale(locale: settingModel.locale)))
-               .environment(\.managedObjectContext, persistenceController.container.viewContext)
-               .environmentObject(homeModel)
-               .environmentObject(addModel)
-               .environmentObject(settingModel)
-               .environmentObject(editModel)
-     }
-}
 // Popover动画方式
 class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
-     var statusItem: NSStatusItem? = nil
+     let viewContext = PersistenceController.shared.container.viewContext
+     var appModel = AppModel()
+     var settingModel = SettingModel()
+     var timeModel = TimeModel()
+     var statusItem: NSStatusItem?
      var popover: NSPopover!
-     @AppStorage("statusMenu") var statusMenu: StatusMenu = .popover
+     
      func applicationDidFinishLaunching(_ notification: Notification) {
-          if self.statusMenu == .popover {
-               self.setUpMenu()
-          }
-     }
-     func applicationDidUpdate(_ notification: Notification) {
-          if self.statusMenu == .popover {
-               if self.statusItem == nil {
-                    self.setUpMenu()
-               }
-          } else {
-               if self.popover != nil && self.popover.isShown {
-                    self.popover?.close()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                         if self.statusItem != nil && self.statusMenu != .popover {
-                              NSStatusBar.system.removeStatusItem(self.statusItem!)
-                              self.statusItem = nil
-                         }
-                    }
-               }
-          }
-          toggleActivationPolicy()
-     }
-     func toggleActivationPolicy() {
-          let activationPolicy = NSApp.activationPolicy()
-          if self.statusMenu == .window {
-               if (activationPolicy != .regular) {
-                    NSApp.setActivationPolicy(.regular)
-               }
-          } else if activationPolicy != .accessory {
-               NSApp.setActivationPolicy(.accessory)
-          }
-     }
-     func setUpPopover() {
-          if self.popover == nil {
-               self.popover = NSPopover()
-               self.popover.animates = true
-               self.popover.behavior = .transient
-               self.popover.contentSize = NSSize(width: 300, height: 575)
-               self.popover.contentViewController = NSHostingController(
-                    rootView: AppMain()
-               )
-               self.popover.contentViewController?.view.window?.makeKey()
+          if settingModel.sceneMode == .popover {
+               setUpMenu()
+          } else if settingModel.sceneMode == .window {
+               NSApp.setActivationPolicy(.regular)
           }
      }
      func setUpMenu() {
-          self.setUpPopover()
-          self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-          if let menuButton = statusItem?.button {
-               menuButton.image = .init(systemSymbolName: "key.horizontal.fill", accessibilityDescription: nil)
-               menuButton.action = #selector(menuButtonAction(sender: ))
+          if popover == nil {
+               popover = NSPopover()
+               popover.animates = true
+               popover.behavior = .transient
+               popover.contentSize = NSSize(width: 300, height: 575)
+               popover.contentViewController = NSHostingController(
+                    rootView: HomeView()
+                         .environment(\.managedObjectContext, viewContext)
+                         .environmentObject(appModel)
+                         .environmentObject(settingModel)
+                         .environmentObject(timeModel)
+               )
+               popover.contentViewController!.view.window?.makeKey()
+          }
+          if statusItem == nil {
+               statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+               if let menuButton = statusItem!.button {
+                    menuButton.image = .init(systemSymbolName: "key.horizontal.fill", accessibilityDescription: nil)
+                    menuButton.action = #selector(menuButtonAction(sender: ))
+                    menuButton.window?.registerForDraggedTypes([.fileURL, .multipleTextSelection, .png])
+                    menuButton.window?.delegate = self
+               }
+               statusItem!.isVisible = true
+          }
+     }
+     func draggingEnded(_ sender: NSDraggingInfo) {
+          let board: [String] = sender.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as! [String]
+          
+          self.appModel.setDropImageData(URL(filePath: board[0]))
+     }
+     
+     func openPopover() {
+          if settingModel.sceneMode == .popover {
+               if let menuButton = statusItem?.button {
+                    popover.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: .minY)
+               }
           }
      }
      @objc func menuButtonAction(sender: AnyObject) {
-          if self.popover.isShown {
-               self.popover.performClose(sender)
-          } else {
-               if let menuButton = statusItem?.button{
-                    self.popover.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: .minY)
-               }
-          }
+          popover.isShown ? popover.performClose(sender) : openPopover()
+     }
+}
+
+extension AppDelegate: NSWindowDelegate {}
+extension AppDelegate: NSDraggingDestination {
+     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation{
+          NSApplication.shared.activate(ignoringOtherApps: true )
+          return .copy
+     }
+     func performDragOperation(_ sender: NSDraggingInfo) -> Bool{
+          NSApplication.shared.activate(ignoringOtherApps: true )
+          return true
      }
 }

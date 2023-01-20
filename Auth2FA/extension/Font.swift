@@ -11,14 +11,15 @@ public enum Icon {
     case iconfont(Iconfont)
 }
 
-public enum Iconfont: String, CaseIterable {
-    case nintendo, nintendoswitch, nintendoaccount = "nintendo account", playstation, xbox, steam, twitter, google, npm, discord, qnap, github, gitlab, synology, sony, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, snapchat, rockstargames = "rockstar+games", amazon
+public enum Iconfont: String, CaseIterable, Identifiable {
+    case nintendoaccount = "nintendo account", playstation, xbox, steam, twitter, google, npm, discord, qnap, github, gitlab, synology, sony, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, rockstargames = "rockstar+games", amazon
+    public var id: Self { self }
 }
 
 extension Iconfont {
     var icon: String {
         switch self {
-            case .nintendo, .nintendoswitch, .nintendoaccount:
+            case .nintendoaccount:
                 return "\u{f1fc}"
             case .playstation:
                 return "\u{ec18}"
@@ -56,8 +57,6 @@ extension Iconfont {
                 return "\u{eb8a}"
             case .linkedin:
                 return "\u{e60c}"
-            case .snapchat:
-                return "\u{ea33}"
             case .rockstargames:
                 return "\u{e604}"
             case .amazon:

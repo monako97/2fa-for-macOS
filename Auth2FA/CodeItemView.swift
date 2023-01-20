@@ -6,69 +6,64 @@
 //
 import SwiftUI
 
-func getAlgorithm(algorithm: String?) -> Algorithm {
-    return Algorithm(rawValue: algorithm?.lowercased() ?? "sha1") ?? .SHA1
-}
-func getFactor(factor: String?) -> Factor {
-    return Factor(rawValue: factor?.lowercased() ?? "totp") ?? .totp
-}
-
-func generateCode(item: Item) -> String? {
-    return OTP.generateCode(params: parseGenerateParamsOnItem(item))
+func genCode(_ item: Item) -> String? {
+    return OTP.generateCode(item.factor, item.secret, item.period , item.algorithm, item.digits, item.counter)
 }
 
 struct CodeItemView: View {
-    private var item: Item
+    @EnvironmentObject private var time: TimeModel
+    @EnvironmentObject private var setting: SettingModel
+    private let item: Item
     @State private var timeRemaining: Int
     @State private var code: String?
+    @State private var normalCode: String
     @State private var toastMessage: String = ""
     @State private var toastType: ToastStatus = .normal
-    @State private var showDeleteAlert: Bool = false
-    @State private var showToast: Bool = false
-    @State private var showQRCode: Bool = false
-    @State private var showEdit: Bool = false
-    @EnvironmentObject private var settingModel: SettingModel
-    @EnvironmentObject private var editModel: EditModel
-    private let normalCode: String
-    private let timer = Timer.publish(every: 1, on: .current, in: .default).autoconnect()
+    @State private var showView = (delete: false,toast: false,qrcode: false,edit: false)
+    @State private var edit: PutItem = ("", 0, 30, "", "")
     
-    init(item: Item) {
+    init(_ item: Item) {
         self.item = item
-        self.timeRemaining = getTimeRemaining(period: Int(self.item.period))
-        self.code = generateCode(item: item)
+        self.timeRemaining = getTimeRemaining(Date().timeIntervalSince1970, Int(item.period))
+        self.code = genCode(item)
         self.normalCode = String(repeating: "*", count: Int(item.digits))
+    }
+    private func copyToClipBoard(textToCopy: String) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(textToCopy, forType: .string)
     }
     
     var body: some View {
-        let hasTimer = item.factor == "totp" && settingModel.showTimeRemaining
+        let hasTimer = item.factor == "totp" && setting.showTimeRemaining
         HStack (spacing: 10) {
-            if settingModel.enableShowQRCode || hasTimer {
+            if setting.enableShowQRCode || hasTimer {
                 VStack(spacing: 5) {
                     let counterView = Text("\(hasTimer ? timeRemaining : Int(item.counter))")
                         .font(.system(size: 11, weight: .light))
                     let qrcode = Text(Image(systemName: "qrcode"))
                         .font(.system(size: 13, weight: .light))
                     RingView(
-                        total: CGFloat(item.period),
-                        percent: hasTimer ? CGFloat(timeRemaining) : 0,
                         text: IconButton(
-                            icon: hasTimer ? counterView : qrcode,
-                            hoverIcon: settingModel.enableShowQRCode ? qrcode : counterView,
+                            hasTimer ? counterView : qrcode,
+                            setting.enableShowQRCode ? qrcode : counterView,
                             action: {
-                                if settingModel.enableShowQRCode {
-                                    self.showQRCode = true
+                                if setting.enableShowQRCode {
+                                    showView.qrcode = true
                                 }
                             }
-                        )
+                        ),
+                        total: CGFloat(item.period),
+                        percent: hasTimer ? CGFloat(timeRemaining) : 0
                     )
                     .frame(width: 20)
-                    .popover(isPresented: $showQRCode) {
-                        Image(nsImage: generateQRCode(from: OTP.generateURL(parseURLParamsOnItem(item)), size: 168))
-                            .resizable()
-                            .scaledToFit()
-                            .padding()
+                    .popover(isPresented: $showView.qrcode) {
+                        let cgimage = generateQRCode(OTP.generateURL(parseOtpParams(item)), 168)
+                        if cgimage != nil {
+                            Image(cgimage!, scale: 1, label: Text(""))
+                                .padding()
+                        }
                     }
-                    Text(item.factor?.uppercased() ?? "TOTP")
+                    Text((item.factor ?? "TOTP").uppercased())
                         .font(Font.system(size: 8, weight: .light))
                         .opacity(0.6)
                 }
@@ -79,43 +74,27 @@ struct CodeItemView: View {
                         Text(item.remark ?? "")
                             .lineLimit(1)
                         Spacer(minLength: 0)
-                        if settingModel.enableDelete {
-                            IconButton(
-                                icon: Image(systemName: "trash"),
-                                hoverIcon: Image(systemName: "trash.fill"),
-                                action: { self.showDeleteAlert = true }
-                            )
-                            .font(.system(size: 12))
-                            .popover(isPresented: $showDeleteAlert) {
-                                ModalView(
-                                    message: {
-                                        HStack {
-                                            Text("deleteMessage\(Text(String(describing: item.remark ?? "")).foregroundColor(.accentColor))")
+                        if setting.enableDelete {
+                            IconButton<Image>("trash", "trash.fill", { showView.delete = true })
+                                .font(.system(size: 12))
+                                .popover(isPresented: $showView.delete) {
+                                    ModalView(
+                                        Text("deleteMessage\(Text(item.remark ?? "").foregroundColor(.accentColor))")
+                                            .padding(.horizontal, 20)
+                                            .padding(.top, 20)
+                                            .padding(.bottom, 15),
+                                        "thisActionCannotBeUndone",
+                                        destructive: {
+                                            Auth2FAManaged.delete(item)
                                         }
-                                        .padding(.horizontal, 20)
-                                        .padding(.top, 20)
-                                        .padding(.bottom, 15)
-                                    },
-                                    destructive: {
-                                        Auth2FAManaged.delete(obj: item)
-                                    },
-                                    secondaryMessage: "This action cannot be undone!"
-                                )
-                            }
-                        }
-                    }
-                    .onReceive(timer) {time in
-                        let updateTime = getTimeRemaining(period: Int(self.item.period))
-                        
-                        self.timeRemaining = updateTime
-                        if settingModel.showCode && updateTime == Int(item.period) {
-                            self.code = generateCode(item: item)
+                                    )
+                                }
                         }
                     }
                     Divider().foregroundColor(.primary.opacity(0.4))
                     HStack (spacing: 2) {
                         let issuer = item.issuer ?? ""
-                        let icon = Iconfont(rawValue: issuer.lowercased())?.icon
+                        let icon = Iconfont(rawValue: ((item.icon ?? "").isEmpty ? issuer.lowercased() : item.icon!))?.icon
                         HStack(spacing: 5) {
                             if icon != nil {
                                 Text(icon!).font(.iconfont(size: 14))
@@ -130,24 +109,31 @@ struct CodeItemView: View {
                                 .font(.system(size: 10))
                                 .foregroundColor(Color.accentColor)
                         }
-                        Text(settingModel.showCode ? code ?? normalCode : normalCode)
+                        Text(setting.showCode ? code ?? normalCode : normalCode)
                             .font(Font.system(size: 12, weight: .light))
                             .frame(minWidth: CGFloat(item.digits * 11))
                             .tracking(3)
-                            .offset(y: settingModel.showCode ? 0 : 1.5)
+                            .offset(y: setting.showCode ? 0 : 1.5)
                             .padding(.horizontal, 5)
                             .padding(.vertical, 2)
                             .foregroundColor(Color.accentColor)
                             .background(Color.accentColor.opacity(0.1))
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: settingModel.radius / 2))
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: setting.radius / 2))
                             .onChange(of: item.counter, perform: { counter in
-                                if settingModel.showCode {
-                                    self.code = generateCode(item: item)
+                                if setting.showCode {
+                                    self.code = genCode(item)
+                                    self.normalCode = String(repeating: "*", count: Int(item.digits))
                                 }
                             })
-                            .onChange(of: settingModel.showCode, perform: { showCode in
+                            .onChange(of: setting.showCode, perform: { showCode in
                                 if showCode {
-                                    self.code = generateCode(item: item)
+                                    self.code = genCode(item)
+                                }
+                            })
+                            .onChange(of: time.time, perform: {time in
+                                self.timeRemaining = getTimeRemaining(time.timeIntervalSince1970, Int(item.period))
+                                if setting.showCode && timeRemaining == Int(item.period) {
+                                    self.code = genCode(item)
                                 }
                             })
                         
@@ -155,44 +141,47 @@ struct CodeItemView: View {
                     .foregroundColor(.primary.opacity(0.6))
                 }
             }
-            
         }
         .padding(.top, 10)
         .padding(.horizontal, 15)
         .padding(.bottom, 6)
         .onHoverStyle()
         .onTapGesture {
-            if settingModel.enableClipBoard && item.secret != nil {
-                guard let authCode = generateCode(item: item), authCode.count > 0 else {
+            if setting.enableClipBoard && item.secret != nil {
+                guard let authCode = genCode(item), authCode.count > 0 else {
+                    self.toastMessage = "copyFailed"
+                    self.toastType = .error
                     withAnimation {
-                        self.toastMessage = "copyFailed"
-                        self.toastType = .error
-                        self.showToast = true
+                        showView.toast = true
                     }
                     return
                 }
                 copyToClipBoard(textToCopy: authCode)
+                self.toastMessage = "copySuccessfully"
+                self.toastType = .success
                 withAnimation {
-                    self.toastMessage = "copySuccessfully"
-                    self.toastType = .success
-                    self.showToast = true
+                    showView.toast = true
                 }
             }
         }
-        .toast(isShow: $showToast, info: toastMessage, status: toastType)
+        .toast(toastMessage, $showView.toast, status: toastType)
         .contextMenu {
-            if settingModel.enableEdit {
+            if setting.enableEdit {
                 Button {
-                    self.editModel.setup(item: item)
-                    self.showEdit = true
+                    let icon = (item.icon ?? "").isEmpty ? item.issuer?.lowercased() ?? "" : item.icon!
+                    
+                    self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), item.issuer ?? "", icon)
+                    showView.edit = true
                 } label: {
                     Label("edit", systemImage: "square.and.pencil")
                 }
                 Button {
-                    if settingModel.enableClipBoard && item.secret != nil {
-                        copyToClipBoard(textToCopy: OTP.generateURL(parseURLParamsOnItem(item)))
+                    if setting.enableClipBoard && item.secret != nil {
+                        copyToClipBoard(textToCopy: OTP.generateURL(parseOtpParams(item)))
+                        self.toastMessage = "copySuccessfully"
+                        self.toastType = .success
                         withAnimation {
-                            self.showToast = true
+                            showView.toast = true
                         }
                     }
                 } label: {
@@ -200,37 +189,38 @@ struct CodeItemView: View {
                 }
             }
         }
-        .sheet(
-            isPresented: $showEdit,
-            onDismiss: {
-                self.editModel.reset()
-            }
-        ) {
-            ModalView(message: {
+        .sheet(isPresented: $showView.edit, onDismiss: {
+            self.edit = ("", 0, 30, "", "")
+        }) {
+            ModalView(
                 Form {
-                    TextField("remark", text: $editModel.remark)
-                    TextField("issuer", text: $editModel.issuer)
+                    TextField("remark", text: $edit.remark)
+                    TextField("issuer", text: $edit.issuer)
+                    GridPickerView(selection: $edit.icon)
                     if item.factor == "hotp" {
-                        TextField("counter", value: $editModel.counter, formatter: NumberFormatter())
+                        TextField("counter", value: $edit.counter, formatter: NumberFormatter())
                     } else {
-                        TextField("period", value: $editModel.period, formatter: NumberFormatter())
+                        TextField("period", value: $edit.period, formatter: NumberFormatter())
                     }
                 }
-                .formStyle(.grouped)
-                .font(.system(size: 13, weight: .light))
-                .frame(width: 300)
-                .scrollContentBackground(.hidden)
-            }, destructive: {
-                Auth2FAManaged.put(with: item.objectID, remark: self.editModel.remark,issuer: self.editModel.issuer, counter: self.editModel.counter, period: self.editModel.period)
-            })
+                    .formStyle(.grouped)
+                    .font(.system(size: 13, weight: .light))
+                    .frame(width: 300)
+                    .scrollContentBackground(.hidden)
+                ,
+                destructive: {
+                    Auth2FAManaged.put(item.objectID, self.edit)
+                }
+            )
+            .blurBackground()
         }
         .symbolRenderingMode(.multicolor)
-        .environment(\.locale, .init(identifier: getLocale(locale: settingModel.locale)))
+        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 
 struct CodeItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CodeItemView(item: Item())
+        CodeItemView(Item())
     }
 }

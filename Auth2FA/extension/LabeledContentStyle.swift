@@ -5,7 +5,6 @@
 //  Created by neko Mo on 2023/1/5.
 //
 
-import Foundation
 import SwiftUI
 
 struct VerticalLabeledContentStyle: LabeledContentStyle {

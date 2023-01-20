@@ -13,19 +13,11 @@ struct ToastView: View {
     let info: String
     @Binding var isShow: Bool
     @State private var isShowAnimation: Bool = true
-    @State private var duration : Double
-    @State private var status: ToastStatus = .normal
-    let accentColor: Color
-    
-    init(isShow:Binding<Bool>,info: String = "", duration:Double = 2.0, status: ToastStatus = .normal) {
-        self._isShow = isShow
-        self.info = info
-        self.duration = duration
-        self.status = status
-        self.accentColor = status == .warning ? Color.orange : status == .success ? Color.green : status == .error ? Color.red : Color.accentColor
-    }
-    
+    @State var duration: Double
+    @State var status: ToastStatus = .normal
+
     var body: some View {
+        let accentColor = status == .warning ? Color.orange : status == .success ? .green : status == .error ? .red : .accentColor
         HStack{
             Text(LocalizedStringKey(info))
                 .font(.system(size: 12, weight: .regular))
@@ -35,9 +27,8 @@ struct ToastView: View {
                 .padding(.horizontal, 20)
                 .lineLimit(1)
                 .background(
-                    self.accentColor.opacity(0.3)
+                    accentColor.opacity(0.3)
                 )
-                .shadow(color: self.accentColor, radius: 1, y: 1)
         }
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
@@ -63,11 +54,11 @@ struct ToastView: View {
 }
 
 extension View {
-    func toast(isShow:Binding<Bool>, info:String = "", duration:Double = 2.0, status: ToastStatus = .normal) -> some View {
+    func toast(_ info:String,_ isShow:Binding<Bool>, duration:Double = 2.0, status: ToastStatus = .normal) -> some View {
         ZStack {
             self
             if isShow.wrappedValue {
-                ToastView(isShow:isShow, info: info, duration: duration, status: status)
+                ToastView(info: info, isShow: isShow, duration: duration, status: status)
             }
         }
     }
@@ -75,6 +66,6 @@ extension View {
 
 struct ToastView_Previews: PreviewProvider {
     static var previews: some View {
-        ToastView(isShow: .constant(true))
+        ToastView(info: "", isShow: .constant(true), duration: 2.0, status: .normal)
     }
 }

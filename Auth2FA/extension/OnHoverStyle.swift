@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnHoverStyle: ViewModifier {
-    @EnvironmentObject private var settingModel: SettingModel
+    @EnvironmentObject private var setting: SettingModel
     var radius: CGFloat? = nil
     @State private var isHovered = false
     
@@ -18,7 +18,7 @@ struct OnHoverStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: radius ?? settingModel.radius))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: radius ?? setting.radius))
             .shadow(color: .primary.opacity(0.1), radius: isHovered ? 2 : 0.5, x: 0, y: isHovered ? 1 : 0)
             .onHover { isHovered in
                 withAnimation {

@@ -4,9 +4,7 @@
 //
 //  Created by neko Mo on 2023/1/9.
 //
-
-import Foundation
-import AppKit
+import SwiftUI
 
 let fontFiles = ["iconfont"]
 

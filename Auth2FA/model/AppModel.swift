@@ -1,12 +1,12 @@
 //
-//  AddModel.swift
+//  AppModel.swift
 //  Auth2FA
 //
 //  Created by neko Mo on 2022/12/31.
 //
 
 import SwiftUI
-import _PhotosUI_SwiftUI
+import PhotosUI.PHPicker
 
 struct ImageData: Transferable {
     let data: Data
@@ -17,31 +17,35 @@ struct ImageData: Transferable {
         }
     }
 }
-class AddModel: ObservableObject {
-    let algorithmOption: [TabObject<Algorithm>] = [
-        TabObject(label: "SHA1", key: .SHA1),
-        TabObject(label: "SHA256", key: .SHA256),
-        TabObject(label: "SHA512", key: .SHA512)
-    ]
-    let qrDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)!
+let algorithmOption: [TabObject<Algorithm>] = [
+    TabObject("SHA1", .sha1),
+    TabObject("SHA256", .sha256),
+    TabObject("SHA512", .sha512)
+]
 
+enum HomeTab: String, CaseIterable {
+    case list, add
+}
+
+let homeTabs: [TabObject<HomeTab>] = [
+    TabObject("verificationCode", .list, "list.dash.header.rectangle"),
+    TabObject("scanCode", .add, "qrcode.viewfinder")
+]
+let qrDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)!
+
+final class AppModel: ObservableObject {
+    @Published var currentTab: HomeTab = .list
+    @Published var addItem: OTP.Params = (.totp, "", "", "", 30, .sha1, 6, 0, "")
     @Published var addText: String = "add" {
         didSet {
             if addText != "add" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation {
-                        if self.addText == "addSuccessfully" {
+                        if self.addText == "addSuccess" {
                             self.url = ""
-                            self.remark = ""
-                            self.issuer = ""
-                            self.factor = .totp
-                            self.algorithm = .SHA1
-                            self.period = 30
-                            self.digits = 6
-                            self.counter = 0
-                            self.secret = ""
                             self.imageSelection = nil
-                            self.imageData = nil
+                            self.dropImage = nil
+                            self.addItem = (.totp, "", "", "", 30, .sha1, 6, 0, "")
                         }
                         self.addText = "add"
                     }
@@ -51,17 +55,9 @@ class AddModel: ObservableObject {
     }
     @Published var url: String = "" {
         didSet {
-            if url != "" {
+            if url.hasPrefix("otpauth://") {
                 do {
-                    let ds = try OTP.parseURL(url)
-                    self.issuer = ds.issuer
-                    self.secret = ds.secret
-                    self.period = Int(ds.period)
-                    self.algorithm = ds.algorithm
-                    self.factor = ds.factor
-                    self.remark = ds.remark
-                    self.digits = Int(ds.digits)
-                    self.counter = Int(ds.counter)
+                    self.addItem = try OTP.parseURL(url)
                 } catch _ {
                     DispatchQueue.main.async {
                         withAnimation {
@@ -72,26 +68,21 @@ class AddModel: ObservableObject {
             }
         }
     }
-    @Published var factor: Factor = .totp
-    @Published var secret: String = ""
-    @Published var remark: String = ""
-    @Published var issuer: String = ""
-    @Published var period: Int = 30
-    @Published var digits: Int = 6
-    @Published var counter: Int = 0
-    @Published var algorithm: Algorithm = .SHA1
-    var imageData: Data? = nil {
+    var dropImage: Data? = nil {
         didSet {
-            if let imageData {
+            if let dropImage {
                 DispatchQueue.main.async {
-                    guard let ciimage = CIImage(data: imageData) else {
-                        self.imageData = nil
+                    withAnimation {
+                        self.currentTab = .add
+                    }
+                    guard let ciimage = CIImage(data: dropImage) else {
+                        self.dropImage = nil
                         withAnimation {
                             self.addText = "invalidImage"
                         }
                         return
                     }
-                    let features: [CIQRCodeFeature] = self.qrDetector.features(in:  ciimage) as! [CIQRCodeFeature]
+                    let features: [CIQRCodeFeature] = qrDetector.features(in:  ciimage) as! [CIQRCodeFeature]
                     
                     if features.count == 0 {
                         withAnimation {
@@ -99,10 +90,8 @@ class AddModel: ObservableObject {
                         }
                     }
                     for feature in features {
-                        let qrCodeFeature = feature
-                        
-                        if qrCodeFeature.messageString != nil {
-                            self.url = qrCodeFeature.messageString!
+                        if feature.messageString != nil {
+                            self.url = feature.messageString!
                         } else {
                             withAnimation {
                                 self.addText = "theQRcodeIsInvalid"
@@ -124,16 +113,26 @@ class AddModel: ObservableObject {
                         }
                         switch result {
                             case .success(let image?):
-                                self.imageData = image.data
+                                self.dropImage = image.data
                             case .success(nil):
                                 self.addText = "notAValidImage"
-                                self.imageData = nil
+                                self.dropImage = nil
                             case .failure(_):
                                 self.addText = "wrongWrong"
-                                self.imageData = nil
+                                self.dropImage = nil
                         }
                     }
                 }
+            }
+        }
+    }
+    func setDropImageData(_ url: URL) {
+        do {
+            let data = try Data(contentsOf: url)
+            self.dropImage = data
+        } catch {
+            withAnimation {
+                self.addText = "failedToReadFile"
             }
         }
     }

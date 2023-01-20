@@ -5,23 +5,21 @@
   Created by neko Mo on 2023/1/5.
   
 */
-"Two Factor Authentication" = "Two Factor Authentication";
-"Light" = "Light";
-"Dark" = "Dark";
-"Auto" = "System";
-"Language" = "Language";
-"View" = "View";
-"Theme" = "Theme";
+"light" = "Light";
+"dark" = "Dark";
+"auto" = "System";
+"language" = "Language";
+"view" = "View";
+"theme" = "Theme";
 "zh_Hans" = "简体中文";
 "en" = "English";
-"Confirm" = "Confirm";
-"Cancel" = "Cancel";
+"confirm" = "Confirm";
+"cancel" = "Cancel";
 "quit" = "Quit";
 "quitAppMessage" = "Quit Application?";
-"Effective time:%@s" = "effective time: %@s";
 "roundedCorners%@" = "Rounded corners %@pts";
 "deleteMessage%@" = "Are you sure you want to delete %@ ?";
-"This action cannot be undone!" = "This action cannot be undone!";
+"thisActionCannotBeUndone" = "This action cannot be undone!";
 "copyToClipboard" = "Copy to clipboard";
 "copyOTPAuthURL" = "Copy OTPauth URL";
 "enableEditing" = "Enable editing";
@@ -29,9 +27,9 @@
 "showVerificationCode" = "Show verification code";
 "generateQRCode" = "Generate QR Code";
 "showTimeRemaining" = "Show time remaining";
-"Popover" = "Popover";
-"MenuBarExtra" = "MenuBar";
-"Window" = "Window";
+"popover" = "Popover";
+"menuBarExtra" = "MenuBar";
+"window" = "Window";
 "copySuccessfully" = "Copy Successfully";
 "copyFailed" = "Failed to generate verification code";
 "verificationCode" = "Code";
@@ -44,14 +42,15 @@
 "factor" = "Factor";
 "digits" = "Digits";
 "counter" = "Counter";
+"icon" = "Icon";
+"clear" = "Clear";
 "otpauthUrl" = "otpauth://[Factor]/[Issuer]?secret=[Secret]&period=[Period]&remark=[Remark]&algorithm=[Algorithm]";
 "add" = "Add to";
-"addSuccessfully" = "Added successfully!";
+"addSuccess" = "Added successfully!";
 "failedToReadFile" = "Failed to read file!";
 "noQRcode" = "No QR code!!";
 "theQRcodeIsInvalid" = "The QR code is invalid!";
 "invalidImage" = "Invalid image!";
-
 "inputIsInvalid"= "Input is invalid!";
 "wrongWrong" = "Wrong! Wrong!";
 "notAValidImage" = "Not a valid image!";

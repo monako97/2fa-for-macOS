@@ -6,24 +6,23 @@
 //
 
 import SwiftUI
-import _PhotosUI_SwiftUI
-
+import PhotosUI.PHPicker
 
 struct QRCodeScannerView: View {
-    @EnvironmentObject private var addModel: AddModel
-    @EnvironmentObject private var settingModel: SettingModel
-    @State private var image = NSImage(named: "image")
+    @EnvironmentObject private var app: AppModel
+    @EnvironmentObject private var setting: SettingModel
     @Binding var dragOver: Bool
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
             PhotosPicker(
-                selection: $addModel.imageSelection,
+                selection: $app.imageSelection,
                 matching: .images,
                 photoLibrary: .shared()
             ) {
-                if addModel.imageData != nil {
-                    Image(nsImage: NSImage(data: addModel.imageData!)!)
+                if app.dropImage != nil {
+                    Image(nsImage: NSImage(data: app.dropImage!)!)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
@@ -45,16 +44,19 @@ struct QRCodeScannerView: View {
                 RoundedRectangle(cornerRadius: 20)
             )
             .shadow(color: dragOver ? Color.accentColor : Color.clear, radius: 4)
-            Spacer()
+            .padding(.bottom, 10)
+            Spacer(minLength: 0)
             VStack (spacing: 10) {
-                TextField("otpauthUrl", text: $addModel.url)
-                Divider()
-                TextField("remark", text: $addModel.remark)
-                Divider()
-                TextField("secret", text: $addModel.secret)
-                Divider()
+                Group {
+                    TextField("otpauthUrl", text: $app.url)
+                    Divider()
+                    TextField("remark", text: $app.addItem.remark)
+                    Divider()
+                    TextField("secret", text: $app.addItem.secret)
+                    Divider()
+                }
                 HStack {
-                    Picker("factor", selection: $addModel.factor, content: {
+                    Picker("factor", selection: $app.addItem.factor, content: {
                         Text("TOTP")
                             .font(.system(size: 12, weight: .light))
                             .tag(Factor.totp)
@@ -63,25 +65,33 @@ struct QRCodeScannerView: View {
                             .tag(Factor.hotp)
                     })
                     .labelsHidden()
-                    .frame(width: 33)
+                    .frame(width: 50)
                     Divider().frame(height: 14)
-                    TextField("digits", value: $addModel.digits, formatter: NumberFormatter())
-                        .frame(width: 30)
+                    TextField("digits", value: $app.addItem.digits, formatter: NumberFormatter())
                     Divider().frame(height: 14)
-                    if addModel.factor == .totp {
-                        TextField("period", value: $addModel.period, formatter: NumberFormatter())
-                            .frame(width: 30)
+                    if app.addItem.factor == .totp {
+                        TextField("period", value: app.addItem.factor == .totp ? $app.addItem.period : $app.addItem.counter, formatter: NumberFormatter())
                     } else {
-                        TextField("counter", value: $addModel.counter, formatter: NumberFormatter())
-                            .frame(width: 30)
+                        TextField("counter", value: $app.addItem.counter, formatter: NumberFormatter())
                     }
-                    Divider().frame(height: 14)
-                    TextField("issuer", text: $addModel.issuer)
-                    Text(Iconfont(rawValue: addModel.issuer.lowercased())?.icon ?? Iconfont.gitlab.icon)
-                        .font(.iconfont(size: 18))
                 }
                 Divider()
-                SegmentedControlView(tabs: addModel.algorithmOption, currentTab: $addModel.algorithm)
+                HStack {
+                    HStack {
+                        let icon = Iconfont(rawValue: app.addItem.issuer.lowercased())?.icon
+                        if icon != nil {
+                            Text(icon!).font(.iconfont(size: 14))
+                        } else {
+                            GridPickerView(selection: $app.addItem.icon, size: 14)
+                                .labelsHidden()
+                        }
+                    }
+                    .frame(width: 50)
+                    Divider().frame(height: 14)
+                    TextField("issuer", text: $app.addItem.issuer)
+                }
+                Divider()
+                SegmentedControlView(algorithmOption, $app.addItem.algorithm)
             }
             .font(.system(size: 12))
             .fontWeight(.light)
@@ -90,7 +100,7 @@ struct QRCodeScannerView: View {
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
         }
         .padding(15)
-        .environment(\.locale, .init(identifier: getLocale(locale: settingModel.locale)))
+        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 

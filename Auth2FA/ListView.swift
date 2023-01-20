@@ -7,16 +7,18 @@
 
 import SwiftUI
 
+
 struct ListView: View {
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.objectID, ascending: false)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.objectID, ascending: true)],
         animation: .default
     ) private var items: FetchedResults<Item>
-    
     var body: some View {
-        ScrollView {
-            ForEach(items) { item in
-                CodeItemView(item: item)
+        ScrollView (showsIndicators: false) {
+            LazyVStack {
+                ForEach(items) { item in
+                    CodeItemView(item)
+                }
             }
             .padding(15)
         }
