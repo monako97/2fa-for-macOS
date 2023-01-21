@@ -17,20 +17,11 @@ struct ImageData: Transferable {
         }
     }
 }
-let algorithmOption: [TabObject<Algorithm>] = [
-    TabObject("SHA1", .sha1),
-    TabObject("SHA256", .sha256),
-    TabObject("SHA512", .sha512)
-]
 
 enum HomeTab: String, CaseIterable {
     case list, add
 }
 
-let homeTabs: [TabObject<HomeTab>] = [
-    TabObject("verificationCode", .list, "list.dash.header.rectangle"),
-    TabObject("scanCode", .add, "qrcode.viewfinder")
-]
 let qrDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)!
 
 final class AppModel: ObservableObject {

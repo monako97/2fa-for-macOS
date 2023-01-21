@@ -14,7 +14,10 @@
 "view" = "视图";
 "theme" = "主题";
 "zh_Hans" = "简体中文";
+"autoStart" = "登录自启动";
 "en" = "English";
+"on" = "开启";
+"off" = "关闭";
 "confirm" = "确认";
 "cancel" = "取消";
 "quit" = "退出";

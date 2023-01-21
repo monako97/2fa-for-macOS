@@ -52,20 +52,36 @@ struct QRCodeScannerView: View {
                     Divider()
                     TextField("remark", text: $app.addItem.remark)
                     Divider()
+                    HStack {
+                        HStack {
+                            let icon = Iconfont(rawValue: app.addItem.issuer.lowercased())?.icon
+                            if icon != nil {
+                                Text(icon!).font(.iconfont(size: 14))
+                                    .onAppear {
+                                        app.addItem.icon = ""
+                                    }
+                            } else {
+                                GridPickerView(selection: $app.addItem.icon, size: 14)
+                                    .labelsHidden()
+                            }
+                        }
+                        Divider().frame(height: 14)
+                        TextField("issuer", text: $app.addItem.issuer)
+                    }
+                    Divider()
                     TextField("secret", text: $app.addItem.secret)
                     Divider()
                 }
                 HStack {
-                    Picker("factor", selection: $app.addItem.factor, content: {
-                        Text("TOTP")
-                            .font(.system(size: 12, weight: .light))
-                            .tag(Factor.totp)
-                        Text("HOTP")
-                            .font(.system(size: 12, weight: .light))
-                            .tag(Factor.hotp)
-                    })
+                    Picker("factor", selection: $app.addItem.factor){
+                        ForEach(Factor.allCases) { key in
+                            Text(key.rawValue.uppercased())
+                                .font(.system(size: 12, weight: .light))
+                                .tag(key)
+                        }
+                    }
                     .labelsHidden()
-                    .frame(width: 50)
+                    .frame(width: 32)
                     Divider().frame(height: 14)
                     TextField("digits", value: $app.addItem.digits, formatter: NumberFormatter())
                     Divider().frame(height: 14)
@@ -76,22 +92,11 @@ struct QRCodeScannerView: View {
                     }
                 }
                 Divider()
-                HStack {
-                    HStack {
-                        let icon = Iconfont(rawValue: app.addItem.issuer.lowercased())?.icon
-                        if icon != nil {
-                            Text(icon!).font(.iconfont(size: 14))
-                        } else {
-                            GridPickerView(selection: $app.addItem.icon, size: 14)
-                                .labelsHidden()
-                        }
-                    }
-                    .frame(width: 50)
-                    Divider().frame(height: 14)
-                    TextField("issuer", text: $app.addItem.issuer)
-                }
-                Divider()
-                SegmentedControlView(algorithmOption, $app.addItem.algorithm)
+                SegmentedControlView([
+                    TabObject("SHA1", .sha1),
+                    TabObject("SHA256", .sha256),
+                    TabObject("SHA512", .sha512)
+                ], $app.addItem.algorithm)
             }
             .font(.system(size: 12))
             .fontWeight(.light)

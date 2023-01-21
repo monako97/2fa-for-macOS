@@ -12,7 +12,7 @@ public enum Icon {
 }
 
 public enum Iconfont: String, CaseIterable, Identifiable {
-    case nintendoaccount = "nintendo account", playstation, xbox, steam, twitter, google, npm, discord, qnap, github, gitlab, synology, sony, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, rockstargames = "rockstar+games", amazon
+    case nintendoaccount = "nintendo account", playstation, xbox, steam, twitter, google, npm, discord, qnap, github, gitlab, synology, sony, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, rockstargames = "rockstar+games", amazon, paypal, snapchat, dropbox, mega
     public var id: Self { self }
 }
 
@@ -61,6 +61,14 @@ extension Iconfont {
                 return "\u{e604}"
             case .amazon:
                 return "\u{ea09}"
+            case .paypal:
+                return "\u{e60d}"
+            case .snapchat:
+                return "\u{ea33}"
+            case .dropbox:
+                return "\u{ea0a}"
+            case .mega:
+                return "\u{ec0f}"
         }
     }
 }

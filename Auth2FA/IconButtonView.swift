@@ -30,6 +30,7 @@ struct IconButton<IconView: View>: View {
                 option.icon
             }
         })
+        .buttonStyle(.plain)
         .onHover{ isHovered in
             withAnimation {
                 self.isHovered = isHovered

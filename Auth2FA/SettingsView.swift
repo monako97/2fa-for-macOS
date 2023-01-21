@@ -9,50 +9,68 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var setting: SettingModel
-    
+    private let toggle = [TabObject("off", false),TabObject("on", true)]
+    private let sceneModes: [TabObject<SceneMode>] = [
+        TabObject("popover", .popover, "bubble.middle.top", "bubble.middle.top.fill"),
+        TabObject("menuBarExtra", .menuBarExtra, "menubar.arrow.down.rectangle", "menubar.dock.rectangle"),
+        TabObject("window", .window, "macwindow")
+    ]
+    private let themes: [TabObject<AppColorScheme>] = [
+        TabObject("light", .light, "sun.min", "sun.min.fill"),
+        TabObject("dark", .dark, "moon.stars", "moon.stars.fill"),
+        TabObject("auto", .unspecified, "apple.logo")
+    ]
+    private let locales: [TabObject<Localication>] = [
+        TabObject("zh_Hans", .zh_Hans, "textformat.size.zh"),
+        TabObject("en", .en, "textformat"),
+        TabObject("auto", .unspecified, "textformat.size")
+    ]
+    private let autoStart = [TabObject("off", 0),TabObject("on", 1)]
     var body: some View {
         Form {
             Group {
-                LabeledContent(content: {
+                LabeledContent("language"){
                     SegmentedControlView(locales, $setting.locale)
-                }, label: {
-                    Text("language")
-                })
-                LabeledContent(content: {
+                }
+                LabeledContent("view"){
                     SegmentedControlView(sceneModes, $setting.sceneMode)
-                }, label: {
-                    Text("view")
-                })
-                LabeledContent(content: {
+                }
+                LabeledContent("theme"){
                     SegmentedControlView(themes, $setting.theme)
-                }, label: {
-                    Text("theme")
-                })
-                HStack (alignment: .lastTextBaseline) {
-                    Slider(value: $setting.radius, in: 0...50) {
-                        Text("roundedCorners\(Text("\(setting.radius, specifier: "%.0f")"))")
-                    }
-                    IconButton<Image>("arrow.triangle.2.circlepath",
-                        {
-                            setting.radius = 8.0
-                        }
-                    )
                 }
             }
             .labeledContentStyle(.vertical)
-            LazyVGrid(columns: [GridItem(.flexible())], alignment: .listRowSeparatorTrailing){
-                Toggle("showTimeRemaining", isOn: $setting.showTimeRemaining)
-                Toggle("generateQRCode", isOn: $setting.enableShowQRCode)
-                Toggle("showVerificationCode", isOn: $setting.showCode)
-                Toggle("enableDelete", isOn: $setting.enableDelete)
-                Toggle("enableEditing", isOn: $setting.enableEdit)
-                Toggle("copyToClipboard", isOn: $setting.enableClipBoard)
+            Group {
+                LabeledContent("autoStart"){
+                    SegmentedControlView(autoStart, $setting.autoStart)
+                }
+                LabeledContent("showTimeRemaining"){
+                    SegmentedControlView(toggle, $setting.showTimeRemaining)
+                }
+                LabeledContent("generateQRCode"){
+                    SegmentedControlView(toggle, $setting.enableShowQRCode)
+                }
+                LabeledContent("showVerificationCode"){
+                    SegmentedControlView(toggle, $setting.showCode)
+                }
+                LabeledContent("enableDelete"){
+                    SegmentedControlView(toggle, $setting.enableDelete)
+                }
+                LabeledContent("enableEditing"){
+                    SegmentedControlView(toggle, $setting.enableEdit)
+                }
+                LabeledContent("copyToClipboard"){
+                    SegmentedControlView(toggle, $setting.enableClipBoard)
+                }
+                Slider(value: $setting.radius, in: 0...35) {
+                    Text("roundedCorners\(Text("\(setting.radius, specifier: "%.0f")"))")
+                    IconButton<Image>("arrow.triangle.2.circlepath", { setting.radius = 8.0 })
+                }
             }
-            .labeledContentStyle(.reverse)
-            .frame(width: 300, height: 200)
+            .labeledContentStyle(.toggleSegmentedControl)
         }
+        .frame(width: 300)
         .padding()
-        .toggleStyle(.switch)
         .buttonStyle(.plain)
         .background(.ultraThinMaterial)
         .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))

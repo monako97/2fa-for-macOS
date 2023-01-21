@@ -12,7 +12,10 @@
 "view" = "View";
 "theme" = "Theme";
 "zh_Hans" = "简体中文";
+"autoStart" = "Login self-start";
 "en" = "English";
+"on" = "ON";
+"off" = "OFF";
 "confirm" = "Confirm";
 "cancel" = "Cancel";
 "quit" = "Quit";

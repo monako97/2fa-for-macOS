@@ -20,8 +20,9 @@ public enum Algorithm: String {
     case sha1, sha256, sha512
 }
 
-public enum Factor: String, CaseIterable {
+public enum Factor: String, CaseIterable, Identifiable {
     case totp, hotp
+    public var id: Self { self }
 }
 
 public class OTP {

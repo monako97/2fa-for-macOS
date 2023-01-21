@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ServiceManagement
 
 enum AppColorScheme: String, CaseIterable {
     case dark, light, unspecified
@@ -43,21 +44,6 @@ func getColorSchema(theme: AppColorScheme) -> ColorScheme? {
     }
 }
 
-let sceneModes: [TabObject<SceneMode>] = [
-    TabObject("popover", .popover, "bubble.middle.top", "bubble.middle.top.fill"),
-    TabObject("menuBarExtra", .menuBarExtra, "menubar.arrow.down.rectangle", "menubar.dock.rectangle"),
-    TabObject("window", .window, "macwindow")
-]
-let themes: [TabObject<AppColorScheme>] = [
-    TabObject("light", .light, "sun.min", "sun.min.fill"),
-    TabObject("dark", .dark, "moon.stars", "moon.stars.fill"),
-    TabObject("auto", .unspecified, "apple.logo")
-]
-let locales: [TabObject<Localication>] = [
-    TabObject("zh_Hans", .zh_Hans, "textformat.size.zh"),
-    TabObject("en", .en, "textformat"),
-    TabObject("auto", .unspecified, "textformat.size")
-]
 final class SettingModel: NSObject, ObservableObject {
     @AppStorage("locale") var locale: Localication = .unspecified
     @AppStorage("showMenuBarExtra") var showMenuBarExtra: Bool = false
@@ -74,4 +60,20 @@ final class SettingModel: NSObject, ObservableObject {
     @AppStorage("enableEdit") var enableEdit = true
     @AppStorage("showCode") var showCode = true
     @AppStorage("theme") var theme: AppColorScheme = .unspecified
+    @Published var autoStart: Int = SMAppService.mainApp.status.rawValue {
+        didSet {
+            registerStartupItem()
+        }
+    }
+    func registerStartupItem() {
+        do {
+            if SMAppService.mainApp.status.rawValue == 1 {
+                try SMAppService.mainApp.unregister()
+            } else if SMAppService.mainApp.status.rawValue == 0 {
+                try SMAppService.mainApp.register()
+            }
+        } catch {
+            NSLog("设置启动项失败: \(error), \(error)")
+        }
+    }
 }

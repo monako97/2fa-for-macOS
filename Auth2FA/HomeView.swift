@@ -14,6 +14,10 @@ struct HomeView: View {
     @State private var showSetting: Bool = false
     @State private var showExit: Bool = false
     @State private var dragOver = false
+    private let homeTabs: [TabObject<HomeTab>] = [
+        TabObject("verificationCode", .list, "list.dash.header.rectangle"),
+        TabObject("scanCode", .add, "qrcode.viewfinder")
+    ]
     
     var body: some View {
         VStack (spacing: 0){

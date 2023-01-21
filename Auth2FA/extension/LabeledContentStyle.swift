@@ -15,12 +15,13 @@ struct VerticalLabeledContentStyle: LabeledContentStyle {
         }
     }
 }
-struct ReverseLabeledContentStyle: LabeledContentStyle {
+struct SegmentedControlLabeledContentStyle: LabeledContentStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
-            configuration.content
             configuration.label
             Spacer()
+            configuration.content
+                .frame(width: 120)
         }
     }
 }
@@ -29,6 +30,6 @@ extension LabeledContentStyle where Self == VerticalLabeledContentStyle {
     static var vertical: VerticalLabeledContentStyle { .init() }
 }
 
-extension LabeledContentStyle where Self == ReverseLabeledContentStyle {
-    static var reverse: ReverseLabeledContentStyle { .init() }
+extension LabeledContentStyle where Self == SegmentedControlLabeledContentStyle {
+    static var toggleSegmentedControl: SegmentedControlLabeledContentStyle { .init() }
 }
