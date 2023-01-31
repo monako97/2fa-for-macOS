@@ -14,6 +14,7 @@
 		472ED7CE2968013C00727772 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7CD2968013C00727772 /* Int.swift */; };
 		472ED7D229695CFF00727772 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7D129695CFF00727772 /* RingView.swift */; };
 		473C70722966A5D0005A91A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 473C70742966A5D0005A91A0 /* Localizable.strings */; };
+		4773633329892AA300E3B0B7 /* iconfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 4773633229892AA300E3B0B7 /* iconfont.woff2 */; };
 		4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4778AA9529791B9F0001134E /* GridPickerView.swift */; };
 		477C6568296B0ADB00A01DDE /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477C6567296B0ADB00A01DDE /* Font.swift */; };
 		47AF9BFE2943954B00E6E165 /* Auth2FAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */; };
@@ -25,7 +26,6 @@
 		47C1A50B2973D28800B8AFB4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C1A50A2973D28800B8AFB4 /* CloudKit.framework */; };
 		47C1A50D2974167100B8AFB4 /* CancelAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A50C2974167100B8AFB4 /* CancelAll.swift */; };
 		47C1A5112974291000B8AFB4 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A5102974291000B8AFB4 /* TimeModel.swift */; };
-		47DA8E06296BB4B400CD9696 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47DA8E05296BB4B400CD9696 /* iconfont.ttf */; };
 		47DA8E0A296BFDD200CD9696 /* FontRegistering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA8E09296BFDD200CD9696 /* FontRegistering.swift */; };
 		47E7D444295F4A220075833E /* Auth2FA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D442295F4A220075833E /* Auth2FA.xcdatamodeld */; };
 		47E7D446295F4D460075833E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D445295F4D460075833E /* Persistence.swift */; };
@@ -72,6 +72,7 @@
 		472ED7D129695CFF00727772 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		473C70732966A5D0005A91A0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		473C70752966A5D9005A91A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4773633229892AA300E3B0B7 /* iconfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.woff2; sourceTree = "<group>"; };
 		4778AA9529791B9F0001134E /* GridPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPickerView.swift; sourceTree = "<group>"; };
 		477C6567296B0ADB00A01DDE /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		477C6569296B12FE00A01DDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		47C1A50A2973D28800B8AFB4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		47C1A50C2974167100B8AFB4 /* CancelAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAll.swift; sourceTree = "<group>"; };
 		47C1A5102974291000B8AFB4 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
-		47DA8E05296BB4B400CD9696 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		47DA8E09296BFDD200CD9696 /* FontRegistering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRegistering.swift; sourceTree = "<group>"; };
 		47E7D443295F4A220075833E /* Auth2FA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Auth2FA.xcdatamodel; sourceTree = "<group>"; };
 		47E7D445295F4D460075833E /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 				47E7D45C2960D4070075833E /* SettingsView.swift */,
 				473C70742966A5D0005A91A0 /* Localizable.strings */,
 				472ED7D129695CFF00727772 /* RingView.swift */,
-				47DA8E05296BB4B400CD9696 /* iconfont.ttf */,
+				4773633229892AA300E3B0B7 /* iconfont.woff2 */,
 				4778AA9529791B9F0001134E /* GridPickerView.swift */,
 			);
 			path = Auth2FA;
@@ -370,9 +370,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4773633329892AA300E3B0B7 /* iconfont.woff2 in Resources */,
 				473C70722966A5D0005A91A0 /* Localizable.strings in Resources */,
 				47AF9C022943954B00E6E165 /* Assets.xcassets in Resources */,
-				47DA8E06296BB4B400CD9696 /* iconfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +600,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -617,7 +617,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneko.auth2fa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -638,7 +638,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -655,7 +655,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneko.auth2fa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;

@@ -20,7 +20,7 @@ final class FontRegistering {
     
     func registerFonts() {
         let fontDatas = fontFiles
-            .compactMap { Bundle(for: Self.self).url(forResource: $0, withExtension: "ttf") }
+            .compactMap { Bundle(for: Self.self).url(forResource: $0, withExtension: "woff2") }
             .compactMap { try? Data(contentsOf: $0) }
         for data in fontDatas {
             guard let provider = CGDataProvider(data: data as CFData) else { return }
