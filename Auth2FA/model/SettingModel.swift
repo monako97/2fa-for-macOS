@@ -69,7 +69,7 @@ final class SettingModel: NSObject, ObservableObject {
         do {
             if SMAppService.mainApp.status.rawValue == 1 {
                 try SMAppService.mainApp.unregister()
-            } else if SMAppService.mainApp.status.rawValue == 0 {
+            } else {
                 try SMAppService.mainApp.register()
             }
         } catch {
