@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ServiceManagement
 
 struct SettingsView: View {
     @EnvironmentObject var setting: SettingModel
@@ -25,7 +26,7 @@ struct SettingsView: View {
         TabObject("en", .en, "textformat"),
         TabObject("auto", .unspecified, "textformat.size")
     ]
-    private let autoStart = [TabObject("off", 0),TabObject("on", 1)]
+    private let autoStart = [TabObject("off", SMAppService.Status.notRegistered),TabObject("on", SMAppService.Status.enabled)]
     var body: some View {
         Form {
             Group {

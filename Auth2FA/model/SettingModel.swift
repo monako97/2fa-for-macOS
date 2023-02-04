@@ -60,17 +60,17 @@ final class SettingModel: NSObject, ObservableObject {
     @AppStorage("enableEdit") var enableEdit = true
     @AppStorage("showCode") var showCode = true
     @AppStorage("theme") var theme: AppColorScheme = .unspecified
-    @Published var autoStart: Int = SMAppService.mainApp.status.rawValue {
+    @Published var autoStart = SMAppService.mainApp.status {
         didSet {
-            registerStartupItem()
+            registerStartupItem(autoStart)
         }
     }
-    func registerStartupItem() {
+    func registerStartupItem(_ status: SMAppService.Status) {
         do {
-            if SMAppService.mainApp.status.rawValue == 1 {
-                try SMAppService.mainApp.unregister()
-            } else {
+            if status == SMAppService.Status.enabled {
                 try SMAppService.mainApp.register()
+            } else if SMAppService.mainApp.status == SMAppService.Status.enabled {
+                try SMAppService.mainApp.unregister()
             }
         } catch {
             NSLog("设置启动项失败: \(error), \(error)")
