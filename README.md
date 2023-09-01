@@ -2,7 +2,7 @@
 
 使用Swift UI开发的身份验证器(2FA)
 
-[![download](https://user-images.githubusercontent.com/37590873/219133640-8b7a0179-20a7-4e02-8887-fbbd2eaad64b.png)]()
+[![download](https://user-images.githubusercontent.com/37590873/219133640-8b7a0179-20a7-4e02-8887-fbbd2eaad64b.png)](https://apps.apple.com/cn/app/auth2fa/id1662505539?mt=12)
 
 1. 无依赖, 极简, 软件大小仅800+k
 2. 不可视时无功耗(♻️)
