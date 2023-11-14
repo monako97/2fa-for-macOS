@@ -50,6 +50,17 @@
                ReferencedContainer = "container:Auth2FA.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "47C9483429DE9CF8007A3BB1"
+               BuildableName = "SafariExtensionViewTests.xctest"
+               BlueprintName = "SafariExtensionViewTests"
+               ReferencedContainer = "container:Auth2FA.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

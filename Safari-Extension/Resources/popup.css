@@ -1,0 +1,77 @@
+:root {
+    color-scheme: light dark;
+    --button-bg: rgba(0,0,0,0.1);
+    --button-hover-bg: rgba(0,0,0,0.125);
+    --button-active-bg: rgba(0,0,0,0.15);
+    --text-color: rgba(0,0,0,0.65);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --button-bg: rgba(255,255,255,0.1);
+        --button-hover-bg: rgba(255,255,255,0.125);
+        --button-active-bg: rgba(255,255,255,0.15);
+        --text-color: rgba(255,255,255,0.65);
+    }
+}
+body {
+    min-width: 180px;
+    padding: 10px;
+    font-family: system-ui;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-color);
+    -webkit-user-select: none;
+    cursor: default;
+}
+header {
+    display: flex;
+    align-item: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--button-bg);
+}
+header span {
+    cursor: pointer;
+}
+button {
+    background: var(--button-bg);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 16px;
+    width: 100%;
+    font-size: 13px;
+    cursor: pointer;
+    
+}
+button:hover {
+    background: var(--button-hover-bg);
+}
+button:active {
+    background: var(--button-active-bg);
+}
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.box {
+    display: flex;
+    width: 100%;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+.timer {
+    width: 32px;
+    height: 32px;
+}
+.code {
+    font-size: x-large;
+}

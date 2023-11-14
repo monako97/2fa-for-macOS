@@ -26,6 +26,16 @@
 		47C1A50B2973D28800B8AFB4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C1A50A2973D28800B8AFB4 /* CloudKit.framework */; };
 		47C1A50D2974167100B8AFB4 /* CancelAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A50C2974167100B8AFB4 /* CancelAll.swift */; };
 		47C1A5112974291000B8AFB4 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1A5102974291000B8AFB4 /* TimeModel.swift */; };
+		47C9487729DEAC2D007A3BB1 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C9487629DEAC2D007A3BB1 /* SafariWebExtensionHandler.swift */; };
+		47C9487A29DEAC2D007A3BB1 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 47C9487929DEAC2D007A3BB1 /* _locales */; };
+		47C9487C29DEAC2D007A3BB1 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 47C9487B29DEAC2D007A3BB1 /* images */; };
+		47C9487E29DEAC2D007A3BB1 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C9487D29DEAC2D007A3BB1 /* manifest.json */; };
+		47C9488029DEAC2D007A3BB1 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 47C9487F29DEAC2D007A3BB1 /* background.js */; };
+		47C9488229DEAC2D007A3BB1 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 47C9488129DEAC2D007A3BB1 /* content.js */; };
+		47C9488429DEAC2D007A3BB1 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 47C9488329DEAC2D007A3BB1 /* popup.html */; };
+		47C9488629DEAC2D007A3BB1 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 47C9488529DEAC2D007A3BB1 /* popup.css */; };
+		47C9488829DEAC2D007A3BB1 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 47C9488729DEAC2D007A3BB1 /* popup.js */; };
+		47C9488D29DEAC2D007A3BB1 /* Safari-Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47C9487429DEAC2D007A3BB1 /* Safari-Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		47DA8E0A296BFDD200CD9696 /* FontRegistering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA8E09296BFDD200CD9696 /* FontRegistering.swift */; };
 		47E7D444295F4A220075833E /* Auth2FA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D442295F4A220075833E /* Auth2FA.xcdatamodeld */; };
 		47E7D446295F4D460075833E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D445295F4D460075833E /* Persistence.swift */; };
@@ -61,7 +71,38 @@
 			remoteGlobalIDString = 47AF9BF92943954B00E6E165;
 			remoteInfo = moneko;
 		};
+		47C9488B29DEAC2D007A3BB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47AF9BF22943954A00E6E165 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47C9487329DEAC2D007A3BB1;
+			remoteInfo = "Safari-Extension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		47C947FA29DE6970007A3BB1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				47C9488D29DEAC2D007A3BB1 /* Safari-Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C9484629DE9CF8007A3BB1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		471403B9295C41E8004ACA85 /* OnHoverStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHoverStyle.swift; sourceTree = "<group>"; };
@@ -76,20 +117,32 @@
 		4778AA9529791B9F0001134E /* GridPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPickerView.swift; sourceTree = "<group>"; };
 		477C6567296B0ADB00A01DDE /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		477C6569296B12FE00A01DDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47AF9BFA2943954B00E6E165 /* Auth2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auth2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Auth2FAApp.swift; sourceTree = "<group>"; };
 		47AF9C012943954B00E6E165 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47AF9C042943954B00E6E165 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		47AF9C062943954B00E6E165 /* Auth2FA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Auth2FA.entitlements; sourceTree = "<group>"; };
-		47AF9C0B2943954B00E6E165 /* Auth2FATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Auth2FATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47AF9C0B2943954B00E6E165 /* Auth2FATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Auth2FATests.xctest; path = /Users/moneko/Documents/Develop.nosync/GitHub/Auth2FA/build/Debug/Auth2FATests.xctest; sourceTree = "<absolute>"; };
 		47AF9C0F2943954B00E6E165 /* Auth2FATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FATests.swift; sourceTree = "<group>"; };
-		47AF9C152943954B00E6E165 /* Auth2FAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Auth2FAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47AF9C152943954B00E6E165 /* Auth2FAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Auth2FAUITests.xctest; path = /Users/moneko/Documents/Develop.nosync/GitHub/Auth2FA/build/Debug/Auth2FAUITests.xctest; sourceTree = "<absolute>"; };
 		47AF9C192943954B00E6E165 /* Auth2FAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FAUITests.swift; sourceTree = "<group>"; };
 		47AF9C1B2943954B00E6E165 /* Auth2FAUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FAUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		47AF9C2929439FF300E6E165 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		47C1A50A2973D28800B8AFB4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		47C1A50C2974167100B8AFB4 /* CancelAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAll.swift; sourceTree = "<group>"; };
 		47C1A5102974291000B8AFB4 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		47C9487429DEAC2D007A3BB1 /* Safari-Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Safari-Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47C9487629DEAC2D007A3BB1 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		47C9487929DEAC2D007A3BB1 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		47C9487B29DEAC2D007A3BB1 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		47C9487D29DEAC2D007A3BB1 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		47C9487F29DEAC2D007A3BB1 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		47C9488129DEAC2D007A3BB1 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		47C9488329DEAC2D007A3BB1 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
+		47C9488529DEAC2D007A3BB1 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
+		47C9488729DEAC2D007A3BB1 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		47C9488929DEAC2D007A3BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47C9488A29DEAC2D007A3BB1 /* Safari_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Safari_Extension.entitlements; sourceTree = "<group>"; };
+		47C9488E29DEAC2D007A3BB1 /* Auth2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auth2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47DA8E09296BFDD200CD9696 /* FontRegistering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRegistering.swift; sourceTree = "<group>"; };
 		47E7D443295F4A220075833E /* Auth2FA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Auth2FA.xcdatamodel; sourceTree = "<group>"; };
 		47E7D445295F4D460075833E /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -133,6 +186,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47C9487129DEAC2D007A3BB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -169,19 +229,11 @@
 				47AF9BFC2943954B00E6E165 /* Auth2FA */,
 				47AF9C0E2943954B00E6E165 /* Auth2FATests */,
 				47AF9C182943954B00E6E165 /* Auth2FAUITests */,
-				47AF9BFB2943954B00E6E165 /* Products */,
+				47C9487529DEAC2D007A3BB1 /* Safari-Extension */,
 				47C1A5092973D28800B8AFB4 /* Frameworks */,
+				47C9487429DEAC2D007A3BB1 /* Safari-Extension.appex */,
+				47C9488E29DEAC2D007A3BB1 /* Auth2FA.app */,
 			);
-			sourceTree = "<group>";
-		};
-		47AF9BFB2943954B00E6E165 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				47AF9BFA2943954B00E6E165 /* Auth2FA.app */,
-				47AF9C0B2943954B00E6E165 /* Auth2FATests.xctest */,
-				47AF9C152943954B00E6E165 /* Auth2FAUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		47AF9BFC2943954B00E6E165 /* Auth2FA */ = {
@@ -245,6 +297,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		47C9487529DEAC2D007A3BB1 /* Safari-Extension */ = {
+			isa = PBXGroup;
+			children = (
+				47C9487629DEAC2D007A3BB1 /* SafariWebExtensionHandler.swift */,
+				47C9488929DEAC2D007A3BB1 /* Info.plist */,
+				47C9488A29DEAC2D007A3BB1 /* Safari_Extension.entitlements */,
+				47C9487829DEAC2D007A3BB1 /* Resources */,
+			);
+			path = "Safari-Extension";
+			sourceTree = "<group>";
+		};
+		47C9487829DEAC2D007A3BB1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				47C9487929DEAC2D007A3BB1 /* _locales */,
+				47C9487B29DEAC2D007A3BB1 /* images */,
+				47C9487D29DEAC2D007A3BB1 /* manifest.json */,
+				47C9488129DEAC2D007A3BB1 /* content.js */,
+				47C9488329DEAC2D007A3BB1 /* popup.html */,
+				47C9488529DEAC2D007A3BB1 /* popup.css */,
+				47C9488729DEAC2D007A3BB1 /* popup.js */,
+				47C9487F29DEAC2D007A3BB1 /* background.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		47E7D453296077250075833E /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,14 +353,17 @@
 				47AF9BF62943954B00E6E165 /* Sources */,
 				47AF9BF72943954B00E6E165 /* Frameworks */,
 				47AF9BF82943954B00E6E165 /* Resources */,
+				47C947FA29DE6970007A3BB1 /* Embed Foundation Extensions */,
+				47C9484629DE9CF8007A3BB1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				47C9488C29DEAC2D007A3BB1 /* PBXTargetDependency */,
 			);
 			name = Auth2FA;
 			productName = moneko;
-			productReference = 47AF9BFA2943954B00E6E165 /* Auth2FA.app */;
+			productReference = 47C9488E29DEAC2D007A3BB1 /* Auth2FA.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47AF9C0A2943954B00E6E165 /* Auth2FATests */ = {
@@ -321,6 +402,23 @@
 			productReference = 47AF9C152943954B00E6E165 /* Auth2FAUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		47C9487329DEAC2D007A3BB1 /* Safari-Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47C9488F29DEAC2D007A3BB1 /* Build configuration list for PBXNativeTarget "Safari-Extension" */;
+			buildPhases = (
+				47C9487029DEAC2D007A3BB1 /* Sources */,
+				47C9487129DEAC2D007A3BB1 /* Frameworks */,
+				47C9487229DEAC2D007A3BB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Safari-Extension";
+			productName = "Safari-Extension";
+			productReference = 47C9487429DEAC2D007A3BB1 /* Safari-Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -328,7 +426,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					47AF9BF92943954B00E6E165 = {
@@ -342,6 +440,9 @@
 						CreatedOnToolsVersion = 14.1;
 						TestTargetID = 47AF9BF92943954B00E6E165;
 					};
+					47C9487329DEAC2D007A3BB1 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 				};
 			};
 			buildConfigurationList = 47AF9BF52943954A00E6E165 /* Build configuration list for PBXProject "Auth2FA" */;
@@ -354,13 +455,14 @@
 				"zh-Hans",
 			);
 			mainGroup = 47AF9BF12943954A00E6E165;
-			productRefGroup = 47AF9BFB2943954B00E6E165 /* Products */;
+			productRefGroup = 47AF9BF12943954A00E6E165;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				47AF9BF92943954B00E6E165 /* Auth2FA */,
 				47AF9C0A2943954B00E6E165 /* Auth2FATests */,
 				47AF9C142943954B00E6E165 /* Auth2FAUITests */,
+				47C9487329DEAC2D007A3BB1 /* Safari-Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -387,6 +489,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C9487229DEAC2D007A3BB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C9488029DEAC2D007A3BB1 /* background.js in Resources */,
+				47C9488629DEAC2D007A3BB1 /* popup.css in Resources */,
+				47C9488429DEAC2D007A3BB1 /* popup.html in Resources */,
+				47C9487C29DEAC2D007A3BB1 /* images in Resources */,
+				47C9487E29DEAC2D007A3BB1 /* manifest.json in Resources */,
+				47C9487A29DEAC2D007A3BB1 /* _locales in Resources */,
+				47C9488229DEAC2D007A3BB1 /* content.js in Resources */,
+				47C9488829DEAC2D007A3BB1 /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +564,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47C9487029DEAC2D007A3BB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C9487729DEAC2D007A3BB1 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -459,6 +584,11 @@
 			isa = PBXTargetDependency;
 			target = 47AF9BF92943954B00E6E165 /* Auth2FA */;
 			targetProxy = 47AF9C162943954B00E6E165 /* PBXContainerItemProxy */;
+		};
+		47C9488C29DEAC2D007A3BB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47C9487329DEAC2D007A3BB1 /* Safari-Extension */;
+			targetProxy = 47C9488B29DEAC2D007A3BB1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -530,6 +660,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -584,6 +715,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -593,6 +725,7 @@
 		47AF9C202943954B00E6E165 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Auth2FA/Auth2FA.entitlements;
@@ -631,6 +764,7 @@
 		47AF9C212943954B00E6E165 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Auth2FA/Auth2FA.entitlements;
@@ -742,6 +876,72 @@
 			};
 			name = Release;
 		};
+		47C9489029DEAC2D007A3BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Safari-Extension/Safari_Extension.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V325FUHP2X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Safari-Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Safari-Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moneko.auth2fa.Safari-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		47C9489129DEAC2D007A3BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Safari-Extension/Safari_Extension.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V325FUHP2X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Safari-Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Safari-Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moneko.auth2fa.Safari-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -777,6 +977,15 @@
 			buildConfigurations = (
 				47AF9C262943954B00E6E165 /* Debug */,
 				47AF9C272943954B00E6E165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47C9488F29DEAC2D007A3BB1 /* Build configuration list for PBXNativeTarget "Safari-Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47C9489029DEAC2D007A3BB1 /* Debug */,
+				47C9489129DEAC2D007A3BB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

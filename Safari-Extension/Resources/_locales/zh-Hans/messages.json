@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Auth2FA",
+        "description": "自动填充双重认证代码, 以方便更快地登录帐户。"
+    },
+    "extension_description": {
+        "message": "自动填充双重认证代码, 以方便更快地登录帐户。",
+        "description": "自动填充双重认证代码, 以方便更快地登录帐户。"
+    }
+}

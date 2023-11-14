@@ -57,8 +57,8 @@
 "noQRcode" = "未识别到有效的二维码!";
 "theQRcodeIsInvalid" = "二维码无效!";
 "invalidImage" = "无效的图片!";
-
 "inputIsInvalid"= "输入不合法!";
 "wrongWrong" = "错了! 错了!";
 "notAValidImage" = "不是有效的图片!";
 "unableToFetchSelectedItem" = "无法获取所选项目!";
+"Open Extension Preferences" = "打开扩展首选项";
