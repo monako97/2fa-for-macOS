@@ -25,9 +25,9 @@ struct HomeView: View {
                 .padding(.horizontal, 15)
                 .padding(.top, 15)
                 .padding(.bottom, 0)
-                .onChange(of: app.currentTab, perform: { v in
-                    v == .list ? time.start() : time.timerCancel.cancelAll()
-                })
+                .onChange(of: app.currentTab) {
+                    app.currentTab == .list ? time.start() : time.timerCancel.cancelAll()
+                }
             if app.currentTab == .list {
                 ListView()
             } else {
@@ -41,6 +41,7 @@ struct HomeView: View {
                     })
                     .font(.system(size: 15))
                     .padding(.vertical, 5)
+                BatteryHealthIconView()
                 Spacer()
                 if app.url != "" || app.currentTab == .add {
                     Button(action: {
@@ -61,8 +62,9 @@ struct HomeView: View {
                             .onHoverStyle(radius: 50)
                     })
                     .disabled(app.addItem.secret == "" || app.addItem.remark == "")
+                    Spacer()
                 }
-                Spacer()
+                AdapterDetailIconView()
                 IconButton<Image>("xmark.circle", "xmark.circle.fill", {
                     self.showExit = true
                 })
@@ -83,12 +85,23 @@ struct HomeView: View {
             .padding(.top, 5)
             .padding(.bottom, 10)
         }
-        .onDrop(of: [.fileURL], isTargeted: $dragOver) { providers -> Bool in
-            if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
-                let _ = provider.loadObject(ofClass: URL.self) { object, error in
-                    if let url = object {
-                        DispatchQueue.main.sync {
-                            app.setDropImageData(url)
+        .onDrop(of: [.plainText, .image], isTargeted: $dragOver) { providers -> Bool in
+            if let provider = providers.first(where: { $0.hasItemConformingToTypeIdentifier("public.png") } ) {
+                provider.loadItem(forTypeIdentifier: "public.png", options: nil) { item, error in
+                    DispatchQueue.main.sync {
+                        app.setDropImageData(item as! URL)
+                    }
+                }
+                return true
+            } else if let provider = providers.first(where: { $0.canLoadObject(ofClass: String.self) } ) {
+                let _ = provider.loadObject(ofClass: String.self) { str, error in
+                    if let urlStr = str {
+                        if urlStr.hasPrefix("otpauth://") {
+                            app.url = urlStr
+                        } else if let url = URL(string: urlStr) {
+                            DispatchQueue.main.sync {
+                                app.setDropImageData(url)
+                            }
                         }
                     }
                 }

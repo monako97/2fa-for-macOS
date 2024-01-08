@@ -103,14 +103,14 @@ final class AppModel: ObservableObject {
                             return
                         }
                         switch result {
-                            case .success(let image?):
-                                self.dropImage = image.data
-                            case .success(nil):
-                                self.addText = "notAValidImage"
-                                self.dropImage = nil
-                            case .failure(_):
-                                self.addText = "wrongWrong"
-                                self.dropImage = nil
+                        case .success(let image?):
+                            self.dropImage = image.data
+                        case .success(nil):
+                            self.addText = "notAValidImage"
+                            self.dropImage = nil
+                        case .failure(_):
+                            self.addText = "wrongWrong"
+                            self.dropImage = nil
                         }
                     }
                 }
@@ -118,13 +118,19 @@ final class AppModel: ObservableObject {
         }
     }
     func setDropImageData(_ url: URL) {
-        do {
-            let data = try Data(contentsOf: url)
-            self.dropImage = data
-        } catch {
-            withAnimation {
-                self.addText = "failedToReadFile"
-            }
+        withAnimation {
+            self.addText = "loading"
         }
+        URLSession.shared.dataTask(with: url) { data,resp,err  in
+            DispatchQueue.main.async {
+                if let imgdata = data {
+                    self.dropImage = imgdata
+                } else {
+                    withAnimation {
+                        self.addText = "failedToReadFile"
+                    }
+                }
+            }
+        }.resume()
     }
 }

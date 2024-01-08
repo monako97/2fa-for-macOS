@@ -32,6 +32,11 @@ struct CodeItemView: View {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(textToCopy, forType: .string)
     }
+    private func getSafeIcon(icon: Optional<String>, issuer: String) -> Iconfont? {
+        let _icon = item.icon ?? ""
+        
+        return Iconfont(rawValue: _icon.isEmpty ? issuer.lowercased() : _icon)
+    }
     
     var body: some View {
         let hasTimer = item.factor == "totp" && setting.showTimeRemaining
@@ -75,29 +80,35 @@ struct CodeItemView: View {
                             .lineLimit(1)
                         Spacer(minLength: 0)
                         if setting.enableDelete {
-                            IconButton<Image>("trash", "trash.fill", { showView.delete = true })
-                                .font(.system(size: 12))
-                                .popover(isPresented: $showView.delete) {
-                                    ModalView(
-                                        Text("deleteMessage\(Text(item.remark ?? "").foregroundColor(.accentColor))")
-                                            .padding(.horizontal, 20)
-                                            .padding(.top, 20)
-                                            .padding(.bottom, 15),
-                                        "thisActionCannotBeUndone",
-                                        destructive: {
-                                            Auth2FAManaged.delete(item)
-                                        }
-                                    )
-                                }
+                            IconButton<Image>(
+                                "trash",
+                                "trash.fill",
+                                { showView.delete = true }
+                            )
+                            .foregroundColor(.red)
+                            .font(.system(size: 12))
+                            .popover(isPresented: $showView.delete) {
+                                ModalView(
+                                    Text("deleteMessage\(Text(item.remark ?? "").foregroundColor(.accentColor))")
+                                        .padding(.horizontal, 20)
+                                        .padding(.top, 20)
+                                        .padding(.bottom, 15),
+                                    "thisActionCannotBeUndone",
+                                    destructive: {
+                                        Auth2FAManaged.delete(item)
+                                    }
+                                )
+                            }
                         }
                     }
                     Divider().foregroundColor(.primary.opacity(0.4))
                     HStack (spacing: 2) {
                         let issuer = item.issuer ?? ""
-                        let icon = Iconfont(rawValue: ((item.icon ?? "").isEmpty ? issuer.lowercased() : item.icon!))?.icon
+                        let icon = getSafeIcon(icon: item.icon, issuer: issuer)
+                        
                         HStack(spacing: 5) {
                             if icon != nil {
-                                Text(icon!).font(.iconfont(size: 14))
+                                Text(String(describing: icon!)).font(.iconfont(size: 14))
                             }
                             Text(issuer)
                                 .lineLimit(1)
@@ -119,23 +130,23 @@ struct CodeItemView: View {
                             .foregroundColor(Color.accentColor)
                             .background(Color.accentColor.opacity(0.1))
                             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: setting.radius / 2))
-                            .onChange(of: item.counter, perform: { counter in
+                            .onChange(of: item.counter) {
                                 if setting.showCode {
                                     self.code = genCode(item)
                                     self.normalCode = String(repeating: "*", count: Int(item.digits))
                                 }
-                            })
-                            .onChange(of: setting.showCode, perform: { showCode in
-                                if showCode {
+                            }
+                            .onChange(of: setting.showCode) {
+                                if setting.showCode {
                                     self.code = genCode(item)
                                 }
-                            })
-                            .onChange(of: time.time, perform: {time in
-                                self.timeRemaining = getTimeRemaining(time.timeIntervalSince1970, Int(item.period))
+                            }
+                            .onChange(of: time.time) {
+                                self.timeRemaining = getTimeRemaining(time.time.timeIntervalSince1970, Int(item.period))
                                 if setting.showCode && timeRemaining == Int(item.period) {
                                     self.code = genCode(item)
                                 }
-                            })
+                            }
                         
                     }
                     .foregroundColor(.primary.opacity(0.6))
@@ -168,9 +179,10 @@ struct CodeItemView: View {
         .contextMenu {
             if setting.enableEdit {
                 Button {
-                    let icon = (item.icon ?? "").isEmpty ? item.issuer?.lowercased() ?? "" : item.icon!
+                    let issuer = item.issuer ?? ""
+                    let icon = getSafeIcon(icon: item.icon, issuer: issuer)
                     
-                    self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), item.issuer ?? "", icon)
+                    self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), issuer, icon?.rawValue)
                     showView.edit = true
                 } label: {
                     Label("edit", systemImage: "square.and.pencil")

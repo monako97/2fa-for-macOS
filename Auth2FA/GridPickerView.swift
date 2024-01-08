@@ -30,7 +30,8 @@ struct GridPickerView: View {
     }
     var body: some View {
         LabeledContent("icon"){
-            let selectionIcon = Iconfont(rawValue: selection ?? "")?.icon
+            
+            let selectionIcon = Iconfont(rawValue: selection ?? "")?.description
             let label = selectionIcon != nil ? Text(selectionIcon!).font(.iconfont(size: size)) : Text("icon").foregroundColor(Color.primary.opacity(0.3)).font(.system(size: 12, weight: .light))
             
             Button(action: {
@@ -41,7 +42,7 @@ struct GridPickerView: View {
                     LazyVGrid(
                         columns: [fixedWid,fixedWid,fixedWid,fixedWid], alignment: .listRowSeparatorTrailing){
                             ForEach(Iconfont.allCases) { icon in
-                                getTag(icon.rawValue, Text(Iconfont(rawValue: icon.rawValue)?.icon ?? Iconfont.github.icon)
+                                getTag(icon.rawValue, Text(icon.description)
                                     .font(.iconfont(size: size)))
                             }
                             getTag("", Text("clear"))

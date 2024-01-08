@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebKit
 
 @main
 struct Auth2FAApp: App {
@@ -18,13 +19,14 @@ struct Auth2FAApp: App {
           FontRegistering.register()
      }
      var body: some Scene {
-          MenuBarExtra("menuBarExtra", systemImage: "key.horizontal.fill", isInserted: $showMenuBarExtra) {
+          MenuBarExtra("menuBarExtra", image: "two.factor.authentication", isInserted: $showMenuBarExtra) {
                HomeView()
                     .frame(width: 300, height: 590)
                     .environment(\.managedObjectContext, delegate.viewContext)
                     .environmentObject(delegate.appModel)
                     .environmentObject(delegate.settingModel)
                     .environmentObject(delegate.timeModel)
+                    .environmentObject(delegate.batteryModel)
           }
           .menuBarExtraStyle(.window)
           WindowGroup {
@@ -49,11 +51,12 @@ struct Auth2FAApp: App {
                     .environmentObject(delegate.appModel)
                     .environmentObject(delegate.settingModel)
                     .environmentObject(delegate.timeModel)
+                    .environmentObject(delegate.batteryModel)
                }
           }
-          .onChange(of: sceneMode, perform: { newSceneMode in
-               NSApp.setActivationPolicy(newSceneMode == .window ? .regular : .accessory)
-               if newSceneMode == .popover {
+          .onChange(of: sceneMode) {
+               NSApp.setActivationPolicy(sceneMode == .window ? .regular : .accessory)
+               if sceneMode == .popover {
                     if delegate.statusItem == nil {
                          delegate.setUpMenu()
                     } else if let statusItem = delegate.statusItem {
@@ -63,9 +66,9 @@ struct Auth2FAApp: App {
                     delegate.popover.close()
                     delegate.statusItem?.isVisible = false
                }
-          })
-          .windowResizability(.contentSize)
+          }
           .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+          .windowResizability(.contentSize)
           .windowStyle(.hiddenTitleBar)
      }
 }
@@ -76,6 +79,7 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
      var appModel = AppModel()
      var settingModel = SettingModel()
      var timeModel = TimeModel()
+     var batteryModel = BatteryModel()
      var statusItem: NSStatusItem?
      var popover: NSPopover!
      
@@ -98,13 +102,13 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
                          .environmentObject(appModel)
                          .environmentObject(settingModel)
                          .environmentObject(timeModel)
+                         .environmentObject(batteryModel)
                )
-               popover.contentViewController!.view.window?.makeKey()
           }
           if statusItem == nil {
                statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
                if let menuButton = statusItem!.button {
-                    menuButton.image = .init(systemSymbolName: "key.horizontal.fill", accessibilityDescription: nil)
+                    menuButton.image = .init(named: "two.factor.authentication")
                     menuButton.action = #selector(menuButtonAction(sender: ))
                     menuButton.window?.registerForDraggedTypes([.fileURL, .multipleTextSelection, .png])
                     menuButton.window?.delegate = self
@@ -113,9 +117,19 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
           }
      }
      func draggingEnded(_ sender: NSDraggingInfo) {
-          let board: [String] = sender.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as! [String]
-          
-          self.appModel.setDropImageData(URL(filePath: board[0]))
+          let propertyList = sender.draggingPasteboard.propertyList
+          if  let board = propertyList(NSPasteboard.PasteboardType("NSFilenamesPboardType")) as? [String] {
+               self.appModel.setDropImageData(URL(filePath: board[0]))
+          } else if let urls = propertyList(.init(rawValue: "WebURLsWithTitlesPboardType")) as? [[String]] {
+               self.appModel.setDropImageData(URL(string: urls[0][0])!)
+          }
+          //          else {
+          //               for type in sender.draggingPasteboard.types ?? [] {
+          //                    if propertyList(type) != nil {
+          //                         print("Type: \(type.rawValue)")
+          //                    }
+          //               }
+          //          }
      }
      
      func openPopover() {
@@ -133,11 +147,9 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
 extension AppDelegate: NSWindowDelegate {}
 extension AppDelegate: NSDraggingDestination {
      func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation{
-          NSApplication.shared.activate(ignoringOtherApps: true )
           return .copy
      }
-     func performDragOperation(_ sender: NSDraggingInfo) -> Bool{
-          NSApplication.shared.activate(ignoringOtherApps: true )
+     func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
           return true
      }
 }

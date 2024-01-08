@@ -21,8 +21,8 @@ struct QRCodeScannerView: View {
                 matching: .images,
                 photoLibrary: .shared()
             ) {
-                if app.dropImage != nil {
-                    Image(nsImage: NSImage(data: app.dropImage!)!)
+                if let dropImage = app.dropImage {
+                    Image(nsImage: NSImage(data: dropImage)!)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
@@ -54,9 +54,8 @@ struct QRCodeScannerView: View {
                     Divider()
                     HStack {
                         HStack {
-                            let icon = Iconfont(rawValue: app.addItem.issuer.lowercased())?.icon
-                            if icon != nil {
-                                Text(icon!).font(.iconfont(size: 14))
+                            if let icon = Iconfont(rawValue: app.addItem.issuer.lowercased()) {
+                                Text(String(describing: icon)).font(.iconfont(size: 14))
                                     .onAppear {
                                         app.addItem.icon = ""
                                     }

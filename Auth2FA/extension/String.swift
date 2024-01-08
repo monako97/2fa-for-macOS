@@ -94,4 +94,12 @@ extension String {
         guard let ds = data(using: encode) else { return nil }
         return Base32.decodeChar(data: ds)
     }
+    func toLowerCamelCase() -> String {
+        guard !isEmpty else { return "" }
+
+        let first = self.prefix(1).lowercased()
+        let other = String(self.dropFirst())
+
+        return first + other
+    }
 }

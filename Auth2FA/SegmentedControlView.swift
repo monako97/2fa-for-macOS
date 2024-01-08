@@ -62,20 +62,20 @@ struct SegmentedControlView<TabKey: Hashable>: View {
                             onChange(tab.key)
                         }
                 } else {
-                    Label(LocalizedStringKey(tab.label), systemImage: (active ? (tab.activeIcon ?? tab.icon) : tab.icon)!)
-                        .foregroundColor(active ? .white : colorScheme == .light ? .secondary : .primary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                        .background{
-                            if active {
-                                makeRoundedRectangle(animation, setting.radius)
-                            }
+                     Label(LocalizedStringKey(tab.label), systemImage: (active ? (tab.activeIcon ?? tab.icon) : tab.icon)!)
+                    .foregroundColor(active ? .white : colorScheme == .light ? .secondary : .primary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+                    .background{
+                        if active {
+                            makeRoundedRectangle(animation, setting.radius)
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            withAnimation{current = tab.key}
-                            onChange(tab.key)
-                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation{current = tab.key}
+                        onChange(tab.key)
+                    }
                 }
                 
             }

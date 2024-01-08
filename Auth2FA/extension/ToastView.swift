@@ -45,7 +45,7 @@ struct ToastView: View {
         .scaleEffect(isShowAnimation ? 1 : 0)
         .animation(Animation.easeIn(duration: 0.5), value: 0)
         .edgesIgnoringSafeArea(.all)
-        .onChange(of: isShowAnimation) { e in
+        .onChange(of: isShowAnimation) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.isShow = false
             }

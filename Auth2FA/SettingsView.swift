@@ -7,7 +7,6 @@
 
 import SwiftUI
 import ServiceManagement
-import SafariServices
 
 struct SettingsView: View {
     @EnvironmentObject var setting: SettingModel
@@ -70,25 +69,25 @@ struct SettingsView: View {
                 }
             }
             .labeledContentStyle(.toggleSegmentedControl)
-            HStack {
-                Spacer()
-                Button(action: {
-                    SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.moneko.auth2fa.Safari-Extension") { error in
-                        if let error = error {
-                            // Handle the error
-                        }
-                    }
-                }, label: {
-                    Text("Open Extension Preferences")
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 32)
-                        .padding(.vertical, 5)
-                        .background(Color(.controlAccentColor))
-                        .clipShape(RoundedRectangle(cornerRadius: 50))
-                        .onHoverStyle(radius: 50)
-                })
-                Spacer()
-            }
+//            HStack {
+//                Spacer()
+//                Button(action: {
+//                    SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.moneko.auth2fa.Safari-Extension") { error in
+//                        if error != nil {
+//                            // Handle the error
+//                        }
+//                    }
+//                }, label: {
+//                    Text("Open Extension Preferences")
+//                        .foregroundColor(.white)
+//                        .padding(.horizontal, 32)
+//                        .padding(.vertical, 5)
+//                        .background(Color(.controlAccentColor))
+//                        .clipShape(RoundedRectangle(cornerRadius: 50))
+//                        .onHoverStyle(radius: 50)
+//                })
+//                Spacer()
+//            }
         }
         .frame(width: 300)
         .padding()
