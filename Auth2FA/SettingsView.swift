@@ -10,6 +10,8 @@ import ServiceManagement
 
 struct SettingsView: View {
     @EnvironmentObject var setting: SettingModel
+    @EnvironmentObject var app: AppModel
+    
     private let toggle = [TabObject("off", false),TabObject("on", true)]
     private let sceneModes: [TabObject<SceneMode>] = [
         TabObject("popover", .popover, "bubble.middle.top", "bubble.middle.top.fill"),
@@ -72,11 +74,11 @@ struct SettingsView: View {
 //            HStack {
 //                Spacer()
 //                Button(action: {
-//                    SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.moneko.auth2fa.Safari-Extension") { error in
-//                        if error != nil {
-//                            // Handle the error
-//                        }
-//                    }
+////                    SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.moneko.auth2fa.Safari-Extension") { error in
+////                        if error != nil {
+////                            // Handle the error
+////                        }
+////                    }
 //                }, label: {
 //                    Text("Open Extension Preferences")
 //                        .foregroundColor(.white)

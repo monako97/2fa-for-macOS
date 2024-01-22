@@ -33,7 +33,7 @@ struct HomeView: View {
             } else {
                 QRCodeScannerView(dragOver: $dragOver)
             }
-            HStack {
+            HStack (alignment: .center) {
                 IconButton<Image>("gear", { self.showSetting = true })
                     .popover(isPresented: $showSetting, content: {
                         SettingsView()
@@ -62,8 +62,10 @@ struct HomeView: View {
                             .onHoverStyle(radius: 50)
                     })
                     .disabled(app.addItem.secret == "" || app.addItem.remark == "")
-                    Spacer()
+                } else {
+                    Text(app.version).foregroundStyle(.secondary.opacity(0.5)).font(.system(size: 12, weight: .light))
                 }
+                Spacer()
                 AdapterDetailIconView()
                 IconButton<Image>("xmark.circle", "xmark.circle.fill", {
                     self.showExit = true

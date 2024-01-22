@@ -24,7 +24,19 @@ enum HomeTab: String, CaseIterable {
 
 let qrDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)!
 
+
+func getAppVersion() -> String {
+    if let infoDictionary = Bundle.main.infoDictionary,
+        let appVersion = infoDictionary["CFBundleShortVersionString"] as? String,
+       let buildNumber = infoDictionary["CFBundleVersion"] as? String {
+        return "\(appVersion) (Build: \(buildNumber))"
+    } else {
+        return "Version information not available"
+    }
+}
+
 final class AppModel: ObservableObject {
+    var version = getAppVersion()
     @Published var currentTab: HomeTab = .list
     @Published var addItem: OTP.Params = (.totp, "", "", "", 30, .sha1, 6, 0, "")
     @Published var addText: String = "add" {
