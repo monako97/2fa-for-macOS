@@ -9,7 +9,7 @@ import SwiftUI
 
 public enum Iconfont: String, CaseIterable, Identifiable, CustomStringConvertible {
     public var id: Self { self }
-    case nintendoaccount = "nintendo account", playstation, xbox, twitter, x, google, npm, discord, qnap, github, gitlab, synology, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, rockstargames = "rockstar+games", amazon, paypal, snapchat, dropbox, mega, gbatemp, instagram, pixiv, openai, adobe, jetbrains, riot, unity, ubisoft, shopify
+    case nintendoaccount = "nintendo account", playstation, xbox, twitter, x, google, npm, discord, qnap, github, gitlab, synology, facebook, twitch, tesla, microsoft,  epicgames = "epic+games", linkedin, rockstargames = "rockstar+games", amazon, paypal, snapchat, dropbox, mega, gbatemp, instagram, pixiv, openai, adobe, jetbrains, riot, unity, ubisoft, shopify, aliyun
     
     public var description: String {
         switch self {
@@ -47,6 +47,7 @@ public enum Iconfont: String, CaseIterable, Identifiable, CustomStringConvertibl
         case .unity: return "\u{ecf6}"
         case .ubisoft: return "\u{ecf2}"
         case .shopify: return "\u{ea03}"
+        case .aliyun: return "\u{e6d1}"
         }
     }
 }
