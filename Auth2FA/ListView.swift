@@ -7,20 +7,53 @@
 
 import SwiftUI
 
-
 struct ListView: View {
+    @EnvironmentObject private var time: TimeModel
+    @EnvironmentObject private var app: AppModel
+    @FocusState private var focused: Bool
+    @State private var query = ""
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.objectID, ascending: true)],
-        animation: .default
-    ) private var items: FetchedResults<Item>
+        predicate: nil,
+        animation: .default.speed(450)
+    )
+    private var items: FetchedResults<Item>
+
     var body: some View {
-        ScrollView (showsIndicators: false) {
-            LazyVStack {
-                ForEach(items) { item in
-                    CodeItemView(item)
-                }
+        ZStack (alignment: .topLeading) {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                TextField("Search...", text: $query)
+                    .focused($focused)
+                    .textFieldStyle(.plain)
+                    .task(id: query, priority: .background) {
+                        items.nsPredicate = query.isEmpty ? nil : NSPredicate(format: "issuer CONTAINS[c] %@ OR remark CONTAINS[c] %@ OR factor CONTAINS[c] %@", query, query, query)
+                    }
+                
             }
-            .padding(15)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 15)
+            .background(Color.accentColor.opacity(0.05))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
+            .cornerRadius(8)
+            .font(.subheadline)
+            .padding(.top, 10)
+            .padding(.horizontal)
+            .zIndex(1)
+            
+            ScrollView (showsIndicators: false) {
+                LazyVStack {
+                    ForEach(items) { item in
+                        CodeItemView(item)
+                    }
+                }
+                .padding(.top, 35)
+                .padding(15)
+            }
+        }
+        .task(id: app.currentTab, priority: .background) {
+            focused = false
+            app.currentTab == .list ? time.start() : time.timerCancel.cancelAll()
         }
     }
 }

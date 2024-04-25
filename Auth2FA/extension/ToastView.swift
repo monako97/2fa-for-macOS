@@ -30,7 +30,7 @@ struct ToastView: View {
                     accentColor.opacity(0.3)
                 )
         }
-        .onAppear() {
+        .task(priority: .background) {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                 withAnimation {
                     isShowAnimation = false
@@ -46,8 +46,10 @@ struct ToastView: View {
         .animation(Animation.easeIn(duration: 0.5), value: 0)
         .edgesIgnoringSafeArea(.all)
         .onChange(of: isShowAnimation) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.isShow = false
+            Task(priority: .background) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.isShow = false
+                }
             }
         }
     }

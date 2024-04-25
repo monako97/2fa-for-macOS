@@ -9,6 +9,7 @@ import SwiftUI
 import PhotosUI.PHPicker
 
 struct QRCodeScannerView: View {
+//    @EnvironmentObject private var time: TimeModel
     @EnvironmentObject private var app: AppModel
     @EnvironmentObject private var setting: SettingModel
     @Binding var dragOver: Bool
@@ -105,6 +106,10 @@ struct QRCodeScannerView: View {
         }
         .padding(15)
         .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
+//        .onAppear {
+//            print("onAppear qrcode ")
+//            time.timerCancel.cancelAll()
+//        }
     }
 }
 

@@ -23,7 +23,7 @@ struct AdapterDetailIconView: View {
         .popover(isPresented: $showAdapterDetail, content: {
             AdapterDetailView()
         })
-        .onChange(of: time.time) {
+        .task(id: time.time, priority: .background) {
             battery.refresh()
         }
     }

@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var app: AppModel
     @EnvironmentObject private var setting: SettingModel
-    @EnvironmentObject private var time: TimeModel
     @State private var showSetting: Bool = false
     @State private var showExit: Bool = false
     @State private var dragOver = false
@@ -25,14 +24,7 @@ struct HomeView: View {
                 .padding(.horizontal, 15)
                 .padding(.top, 15)
                 .padding(.bottom, 0)
-                .onChange(of: app.currentTab) {
-                    app.currentTab == .list ? time.start() : time.timerCancel.cancelAll()
-                }
-            if app.currentTab == .list {
-                ListView()
-            } else {
-                QRCodeScannerView(dragOver: $dragOver)
-            }
+            self.renderContent()
             HStack (alignment: .center) {
                 IconButton<Image>("gear", { self.showSetting = true })
                     .popover(isPresented: $showSetting, content: {
@@ -43,28 +35,7 @@ struct HomeView: View {
                     .padding(.vertical, 5)
                 BatteryHealthIconView()
                 Spacer()
-                if app.url != "" || app.currentTab == .add {
-                    Button(action: {
-                        if app.addText == "add" {
-                            withAnimation {
-                                app.currentTab = .list
-                                Auth2FAManaged.add(app.addItem)
-                                app.addText = "addSuccess"
-                            }
-                        }
-                    }, label: {
-                        Text(LocalizedStringKey(app.addText))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 5)
-                            .background(Color(.controlAccentColor))
-                            .clipShape(RoundedRectangle(cornerRadius: 50))
-                            .onHoverStyle(radius: 50)
-                    })
-                    .disabled(app.addItem.secret == "" || app.addItem.remark == "")
-                } else {
-                    Text(app.version).foregroundStyle(.secondary.opacity(0.5)).font(.system(size: 12, weight: .light))
-                }
+                self.renderFooterButton()
                 Spacer()
                 AdapterDetailIconView()
                 IconButton<Image>("xmark.circle", "xmark.circle.fill", {
@@ -117,6 +88,41 @@ struct HomeView: View {
         )
         .preferredColorScheme(getColorSchema(theme: setting.theme))
         .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
+    }
+    
+    @ViewBuilder
+    func renderContent() -> some View {
+        if app.currentTab == .list {
+            ListView()
+        } else {
+            QRCodeScannerView(dragOver: $dragOver)
+        }
+    }
+    
+    @ViewBuilder
+    func renderFooterButton() -> some View {
+        if app.url != "" || app.currentTab == .add {
+            Button(action: {
+                if app.addText == "add" {
+                    withAnimation {
+                        app.currentTab = .list
+                        Auth2FAManaged.add(app.addItem)
+                        app.addText = "addSuccess"
+                    }
+                }
+            }, label: {
+                Text(LocalizedStringKey(app.addText))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 5)
+                    .background(Color(.controlAccentColor))
+                    .clipShape(RoundedRectangle(cornerRadius: 50))
+                    .onHoverStyle(radius: 50)
+            })
+            .disabled(app.addItem.secret == "" || app.addItem.remark == "")
+        } else {
+            Text(app.version).foregroundStyle(.secondary.opacity(0.5)).font(.system(size: 12, weight: .light))
+        }
     }
 }
 

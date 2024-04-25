@@ -20,56 +20,68 @@ struct Auth2FAApp: App {
      }
      var body: some Scene {
           MenuBarExtra("menuBarExtra", image: "two.factor.authentication", isInserted: $showMenuBarExtra) {
-               HomeView()
-                    .frame(width: 300, height: 590)
-                    .environment(\.managedObjectContext, delegate.viewContext)
-                    .environmentObject(delegate.appModel)
-                    .environmentObject(delegate.settingModel)
-                    .environmentObject(delegate.timeModel)
-                    .environmentObject(delegate.batteryModel)
+               self.renderMenuBarExtra()
           }
           .menuBarExtraStyle(.window)
           WindowGroup {
                if sceneMode == .window {
-                    VStack (spacing: 0) {
-                         HStack {
-                              Spacer()
-                              Text("Two Factor Authentication")
-                              Spacer()
-                         }
-                         .foregroundColor(.secondary)
-                         .font(.system(size: 13, weight: .bold))
-                         .padding(.top, 5 )
-                         .blurBackground()
-                         HomeView()
-                              .blurBackground()
-                    }
-                    .frame(minWidth: 300, idealWidth: 300, minHeight: 565)
-                    .ignoresSafeArea()
-                    .environment(\.locale, .init(identifier: getLocale(locale: locale)))
-                    .environment(\.managedObjectContext, delegate.viewContext)
-                    .environmentObject(delegate.appModel)
-                    .environmentObject(delegate.settingModel)
-                    .environmentObject(delegate.timeModel)
-                    .environmentObject(delegate.batteryModel)
+                    self.renderWindow()
                }
           }
           .onChange(of: sceneMode) {
-               NSApp.setActivationPolicy(sceneMode == .window ? .regular : .accessory)
-               if sceneMode == .popover {
-                    if delegate.statusItem == nil {
-                         delegate.setUpMenu()
-                    } else if let statusItem = delegate.statusItem {
-                         statusItem.isVisible = true
+               Task(priority: .background) {
+                    NSApp.setActivationPolicy(sceneMode == .window ? .regular : .accessory)
+                    if sceneMode == .popover {
+                         if delegate.statusItem == nil {
+                              delegate.setUpMenu()
+                         } else if let statusItem = delegate.statusItem {
+                              statusItem.isVisible = true
+                         }
+                    } else if (delegate.popover != nil && delegate.popover.isShown) {
+                         delegate.popover.close()
+                         delegate.statusItem?.isVisible = false
                     }
-               } else if (delegate.popover != nil && delegate.popover.isShown) {
-                    delegate.popover.close()
-                    delegate.statusItem?.isVisible = false
                }
           }
           .windowToolbarStyle(.unifiedCompact(showsTitle: false))
           .windowResizability(.contentSize)
           .windowStyle(.hiddenTitleBar)
+     }
+     
+     @ViewBuilder
+     func renderMenuBarExtra() -> some View {
+          HomeView()
+               .frame(width: 300, height: 590)
+               .environment(\.managedObjectContext, delegate.viewContext)
+               .environmentObject(delegate.appModel)
+               .environmentObject(delegate.settingModel)
+               .environmentObject(delegate.timeModel)
+               .environmentObject(delegate.batteryModel)
+     }
+     
+     @ViewBuilder
+     func renderWindow() -> some View {
+          VStack (spacing: 0) {
+               HStack {
+                    Spacer()
+                    Text("Two Factor Authentication")
+                    Spacer()
+               }
+               .foregroundColor(.secondary)
+               .font(.system(size: 13, weight: .bold))
+               .padding(.top, 5 )
+               .blurBackground()
+               HomeView()
+                    .blurBackground()
+          }
+          .frame(minWidth: 300, idealWidth: 300, minHeight: 565)
+          .ignoresSafeArea()
+          .environment(\.locale, .init(identifier: getLocale(locale: locale)))
+          .environment(\.managedObjectContext, delegate.viewContext)
+          .environmentObject(delegate.appModel)
+          .environmentObject(delegate.settingModel)
+          .environmentObject(delegate.timeModel)
+          .environmentObject(delegate.batteryModel)
      }
 }
 
@@ -123,13 +135,6 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
           } else if let urls = propertyList(.init(rawValue: "WebURLsWithTitlesPboardType")) as? [[String]] {
                self.appModel.setDropImageData(URL(string: urls[0][0])!)
           }
-          //          else {
-          //               for type in sender.draggingPasteboard.types ?? [] {
-          //                    if propertyList(type) != nil {
-          //                         print("Type: \(type.rawValue)")
-          //                    }
-          //               }
-          //          }
      }
      
      func openPopover() {
