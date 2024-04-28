@@ -10,6 +10,7 @@ import SwiftUI
 struct ListView: View {
     @EnvironmentObject private var time: TimeModel
     @EnvironmentObject private var app: AppModel
+    @EnvironmentObject private var setting: SettingModel
     @FocusState private var focused: Bool
     @State private var query = ""
     @FetchRequest(
@@ -18,7 +19,7 @@ struct ListView: View {
         animation: .default.speed(450)
     )
     private var items: FetchedResults<Item>
-
+    
     var body: some View {
         ZStack (alignment: .topLeading) {
             HStack {
@@ -29,16 +30,14 @@ struct ListView: View {
                     .task(id: query, priority: .background) {
                         items.nsPredicate = query.isEmpty ? nil : NSPredicate(format: "issuer CONTAINS[c] %@ OR remark CONTAINS[c] %@ OR factor CONTAINS[c] %@", query, query, query)
                     }
-                
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 15)
-            .background(Color.accentColor.opacity(0.05))
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
-            .cornerRadius(8)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: setting.radius))
             .font(.subheadline)
             .padding(.top, 10)
             .padding(.horizontal)
+            .highPerformanceShadow()
             .zIndex(1)
             
             ScrollView (showsIndicators: false) {
@@ -52,6 +51,7 @@ struct ListView: View {
             }
         }
         .task(id: app.currentTab, priority: .background) {
+            
             focused = false
             app.currentTab == .list ? time.start() : time.timerCancel.cancelAll()
         }

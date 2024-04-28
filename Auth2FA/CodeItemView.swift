@@ -226,7 +226,6 @@ struct CodeItemView: View {
             .blurBackground()
         }
         .symbolRenderingMode(.multicolor)
-        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 

@@ -46,9 +46,9 @@ struct GridPickerView: View {
                                     .font(.iconfont(size: size)))
                             }
                             getTag("", Text("clear"))
+                                .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
                         }
                         .padding()
-                        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
                 }
             })
             .buttonStyle(.plain)

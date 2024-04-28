@@ -20,27 +20,30 @@ struct Auth2FAApp: App {
      }
      var body: some Scene {
           MenuBarExtra("menuBarExtra", image: "two.factor.authentication", isInserted: $showMenuBarExtra) {
-               self.renderMenuBarExtra()
+               ZStack {
+                    delegate.renderView()
+                         .frame(width: 300, height: 590)
+               }
+               
           }
           .menuBarExtraStyle(.window)
           WindowGroup {
-               if sceneMode == .window {
-                    self.renderWindow()
-               }
+               self.renderWindow()
           }
-          .onChange(of: sceneMode) {
-               Task(priority: .background) {
-                    NSApp.setActivationPolicy(sceneMode == .window ? .regular : .accessory)
-                    if sceneMode == .popover {
-                         if delegate.statusItem == nil {
-                              delegate.setUpMenu()
-                         } else if let statusItem = delegate.statusItem {
-                              statusItem.isVisible = true
-                         }
-                    } else if (delegate.popover != nil && delegate.popover.isShown) {
-                         delegate.popover.close()
-                         delegate.statusItem?.isVisible = false
+          .onChange(of: sceneMode) { (prev, next) in
+               NSApp.setActivationPolicy(next == .window ? .regular : .accessory)
+               if prev != .popover {
+                    NSApplication.shared.hide(self)
+               }
+               if next == .popover {
+                    if delegate.statusItem == nil {
+                         delegate.setUpMenu()
+                    } else if let _statusItem = delegate.statusItem {
+                         _statusItem.isVisible = true
                     }
+               } else if (delegate.popover != nil && delegate.popover.isShown) {
+                    delegate.popover.close()
+                    delegate.statusItem?.isVisible = false
                }
           }
           .windowToolbarStyle(.unifiedCompact(showsTitle: false))
@@ -49,39 +52,24 @@ struct Auth2FAApp: App {
      }
      
      @ViewBuilder
-     func renderMenuBarExtra() -> some View {
-          HomeView()
-               .frame(width: 300, height: 590)
-               .environment(\.managedObjectContext, delegate.viewContext)
-               .environmentObject(delegate.appModel)
-               .environmentObject(delegate.settingModel)
-               .environmentObject(delegate.timeModel)
-               .environmentObject(delegate.batteryModel)
-     }
-     
-     @ViewBuilder
      func renderWindow() -> some View {
-          VStack (spacing: 0) {
-               HStack {
-                    Spacer()
-                    Text("Two Factor Authentication")
-                    Spacer()
+          if sceneMode == .window {
+               VStack (spacing: 0) {
+                    HStack {
+                         Spacer()
+                         Text("Two Factor Authentication")
+                         Spacer()
+                    }
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 13, weight: .bold))
+                    .padding(.top, 5 )
+                    delegate.renderView()
                }
-               .foregroundColor(.secondary)
-               .font(.system(size: 13, weight: .bold))
-               .padding(.top, 5 )
+               .frame(minWidth: 300, idealWidth: 300, minHeight: 565)
                .blurBackground()
-               HomeView()
-                    .blurBackground()
+               .ignoresSafeArea()
+               .environment(\.locale, .init(identifier: getLocale(locale: locale)))
           }
-          .frame(minWidth: 300, idealWidth: 300, minHeight: 565)
-          .ignoresSafeArea()
-          .environment(\.locale, .init(identifier: getLocale(locale: locale)))
-          .environment(\.managedObjectContext, delegate.viewContext)
-          .environmentObject(delegate.appModel)
-          .environmentObject(delegate.settingModel)
-          .environmentObject(delegate.timeModel)
-          .environmentObject(delegate.batteryModel)
      }
 }
 
@@ -94,6 +82,16 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
      var batteryModel = BatteryModel()
      var statusItem: NSStatusItem?
      var popover: NSPopover!
+     
+     @ViewBuilder
+     func renderView() -> some View {
+          HomeView()
+               .environment(\.managedObjectContext, viewContext)
+               .environmentObject(appModel)
+               .environmentObject(settingModel)
+               .environmentObject(timeModel)
+               .environmentObject(batteryModel)
+     }
      
      func applicationDidFinishLaunching(_ notification: Notification) {
           if settingModel.sceneMode == .popover {
@@ -109,12 +107,7 @@ class AppDelegate: NSObject,ObservableObject,NSApplicationDelegate {
                popover.behavior = .transient
                popover.contentSize = NSSize(width: 300, height: 575)
                popover.contentViewController = NSHostingController(
-                    rootView: HomeView()
-                         .environment(\.managedObjectContext, viewContext)
-                         .environmentObject(appModel)
-                         .environmentObject(settingModel)
-                         .environmentObject(timeModel)
-                         .environmentObject(batteryModel)
+                    rootView: self.renderView()
                )
           }
           if statusItem == nil {

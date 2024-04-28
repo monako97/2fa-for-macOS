@@ -19,7 +19,7 @@ struct OnHoverStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: radius ?? setting.radius))
-            .shadow(color: .primary.opacity(0.1), radius: isHovered ? 2 : 0.5, x: 0, y: isHovered ? 1 : 0)
+            .highPerformanceShadow(color: .primary.opacity(0.1), radius: isHovered ? 2 : 1, x: 0, y: isHovered ? 1 : 0.5)
             .onHover { isHovered in
                 withAnimation {
                     self.isHovered = isHovered

@@ -28,7 +28,7 @@ struct RingView<TextView: View>: View {
                 .rotationEffect(Angle(degrees: 90))
                 .rotation3DEffect(Angle(degrees: 180), axis: (x: 1, y: 0, z: 0))
             text?.foregroundColor(progress == 1 ? .primary : color.opacity(0.9))
-                .shadow(color: .primary.opacity(0.2), radius: 1, x: 0, y: 0)
+                .highPerformanceShadow(color: .primary.opacity(0.2), radius: 0.5, x: 0, y: 0)
         }
     }
 }

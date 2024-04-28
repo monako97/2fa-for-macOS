@@ -83,7 +83,6 @@ struct SegmentedControlView<TabKey: Hashable>: View {
         .padding(2)
         .background(Color.accentColor.opacity(0.1))
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: setting.radius))
-        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
     }
 }
 
@@ -92,7 +91,7 @@ func makeRoundedRectangle(_ animation: Namespace.ID, _ radius: CGFloat) -> some 
         .fill(Color.accentColor)
         .matchedGeometryEffect(id: "SegmentedControl", in: animation)
         .background(Color.clear.clipShape(RoundedRectangle(cornerRadius: radius,style: .continuous)))
-        .shadow(radius: 1, x: 1, y: 1)
+        .highPerformanceShadow(radius: 1, x: 1, y: 1)
 }
 struct SegmentedControlView_Previews: PreviewProvider {
     static var previews: some View {

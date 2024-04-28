@@ -44,7 +44,7 @@ struct QRCodeScannerView: View {
             .clipShape(
                 RoundedRectangle(cornerRadius: 20)
             )
-            .shadow(color: dragOver ? Color.accentColor : Color.clear, radius: 4)
+            .highPerformanceShadow(color: .accentColor, radius: dragOver ? 4 : 0)
             .padding(.bottom, 10)
             Spacer(minLength: 0)
             VStack (spacing: 10) {
@@ -105,11 +105,6 @@ struct QRCodeScannerView: View {
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
         }
         .padding(15)
-        .environment(\.locale, .init(identifier: getLocale(locale: setting.locale)))
-//        .onAppear {
-//            print("onAppear qrcode ")
-//            time.timerCancel.cancelAll()
-//        }
     }
 }
 

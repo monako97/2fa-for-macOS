@@ -44,6 +44,7 @@
 		47E7D461296183900075833E /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E7D4602961838F0075833E /* BlurBackground.swift */; };
 		47EE4F1B2962C1840071ED4F /* Auth2FAManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE4F1A2962C1840071ED4F /* Auth2FAManaged.swift */; };
 		47EE4F1D2962F4F40071ED4F /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE4F1C2962F4F40071ED4F /* QRCode.swift */; };
+		47F4FB002BDE2D070048D6BC /* HighPerformanceShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4FAFF2BDE2D070048D6BC /* HighPerformanceShadow.swift */; };
 		47FBA52D295DA894009AEECA /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FBA52C295DA894009AEECA /* ListView.swift */; };
 		47FBA52F295DA9B4009AEECA /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FBA52E295DA9B4009AEECA /* SegmentedControlView.swift */; };
 		47FBA531295DAC92009AEECA /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FBA530295DAC92009AEECA /* QRCodeScannerView.swift */; };
@@ -136,6 +137,7 @@
 		47E7D4602961838F0075833E /* BlurBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		47EE4F1A2962C1840071ED4F /* Auth2FAManaged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2FAManaged.swift; sourceTree = "<group>"; };
 		47EE4F1C2962F4F40071ED4F /* QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		47F4FAFF2BDE2D070048D6BC /* HighPerformanceShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighPerformanceShadow.swift; sourceTree = "<group>"; };
 		47FBA52C295DA894009AEECA /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		47FBA52E295DA9B4009AEECA /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		47FBA530295DAC92009AEECA /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				477C6567296B0ADB00A01DDE /* Iconfont.swift */,
 				47DA8E09296BFDD200CD9696 /* FontRegistering.swift */,
 				47C1A50C2974167100B8AFB4 /* CancelAll.swift */,
+				47F4FAFF2BDE2D070048D6BC /* HighPerformanceShadow.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				472ED7D229695CFF00727772 /* RingView.swift in Sources */,
 				47E7D461296183900075833E /* BlurBackground.swift in Sources */,
 				477C6568296B0ADB00A01DDE /* Iconfont.swift in Sources */,
+				47F4FB002BDE2D070048D6BC /* HighPerformanceShadow.swift in Sources */,
 				4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */,
 				47E7D45F29616EFF0075833E /* SettingModel.swift in Sources */,
 				47E7D459296088470075833E /* ToastView.swift in Sources */,
@@ -645,7 +649,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -684,7 +688,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
