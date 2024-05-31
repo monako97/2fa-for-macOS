@@ -23,8 +23,6 @@
 "roundedCorners%@" = "Rounded corners %@pts";
 "deleteMessage%@" = "Are you sure you want to delete %@ ?";
 "thisActionCannotBeUndone" = "This action cannot be undone!";
-"copyToClipboard" = "Copy to clipboard";
-"copyOTPAuthURL" = "Copy OTPauth URL";
 "enableEditing" = "Enable editing";
 "enableDelete" = "Enable delete";
 "showVerificationCode" = "Show verification code";
@@ -48,6 +46,7 @@
 "icon" = "Icon";
 "clear" = "Clear";
 "otpauthUrl" = "otpauth://[Factor]/[Issuer]?secret=[Secret]&period=[Period]&remark=[Remark]&algorithm=[Algorithm]";
+"edit" = "Edit";
 "add" = "Add to";
 "addSuccess" = "Added successfully!";
 "failedToReadFile" = "Failed to read file!";

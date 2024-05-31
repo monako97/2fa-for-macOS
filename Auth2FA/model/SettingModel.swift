@@ -55,7 +55,6 @@ final class SettingModel: NSObject, ObservableObject {
     @AppStorage("radius") var radius = 8.0
     @AppStorage("enableDelete") var enableDelete = true
     @AppStorage("showTimeRemaining") var showTimeRemaining = true
-    @AppStorage("enableClipBoard") var enableClipBoard = true
     @AppStorage("enableShowQRCode") var enableShowQRCode = true
     @AppStorage("enableEdit") var enableEdit = true
     @AppStorage("showCode") var showCode = true

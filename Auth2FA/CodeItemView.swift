@@ -13,6 +13,7 @@ func genCode(_ item: Item) -> String? {
 struct CodeItemView: View {
     @EnvironmentObject private var time: TimeModel
     @EnvironmentObject private var setting: SettingModel
+    @EnvironmentObject private var app: AppModel
     private let item: Item
     @State private var timeRemaining: Int
     @State private var code: String?
@@ -177,26 +178,17 @@ struct CodeItemView: View {
         .toast(toastMessage, $showView.toast, status: toastType)
         .contextMenu {
             if setting.enableEdit {
-                Button {
+                Button("edit") {
                     let issuer = item.issuer ?? ""
                     let icon = getSafeIcon(icon: item.icon, issuer: issuer)
                     
                     self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), issuer, icon?.rawValue)
                     showView.edit = true
-                } label: {
-                    Label("edit", systemImage: "square.and.pencil")
                 }
-                Button {
-                    if setting.enableClipBoard && item.secret != nil {
-                        copyToClipBoard(textToCopy: OTP.generateURL(parseOtpParams(item)))
-                        self.toastMessage = "copySuccessfully"
-                        self.toastType = .success
-                        withAnimation {
-                            showView.toast = true
-                        }
-                    }
-                } label: {
-                    Label("copyOTPAuthURL", systemImage: "doc.on.clipboard")
+            }
+            Button("add") {
+                withAnimation {
+                    app.currentTab = HomeTab.add
                 }
             }
         }

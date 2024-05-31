@@ -62,9 +62,6 @@ struct SettingsView: View {
                 LabeledContent("enableEditing"){
                     SegmentedControlView(toggle, $setting.enableEdit)
                 }
-                LabeledContent("copyToClipboard"){
-                    SegmentedControlView(toggle, $setting.enableClipBoard)
-                }
                 Slider(value: $setting.radius, in: 0...35) {
                     Text("roundedCorners\(Text("\(setting.radius, specifier: "%.0f")"))")
                     IconButton<Image>("arrow.triangle.2.circlepath", { setting.radius = 8.0 })
