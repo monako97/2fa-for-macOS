@@ -6,7 +6,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>iconfont.woff2</string>
+		<string>iconfont.1.woff2</string>
+		<string>iconfont.0.woff2</string>
 	</array>
 </dict>
 </plist>

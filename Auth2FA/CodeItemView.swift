@@ -33,10 +33,10 @@ struct CodeItemView: View {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(textToCopy, forType: .string)
     }
-    private func getSafeIcon(icon: Optional<String>, issuer: String) -> Iconfont? {
+    private func getSafeIcon(icon: Optional<String>, issuer: String) -> IconView? {
         let _icon = item.icon ?? ""
         
-        return Iconfont(rawValue: _icon.isEmpty ? issuer.lowercased() : _icon)
+        return IconView(_icon.isEmpty ? issuer.lowercased() : _icon)
     }
     
     var body: some View {
@@ -105,12 +105,10 @@ struct CodeItemView: View {
                     Divider().foregroundColor(.primary.opacity(0.4))
                     HStack (spacing: 2) {
                         let issuer = item.issuer ?? ""
-                        let icon = getSafeIcon(icon: item.icon, issuer: issuer)
+                        let _icon = item.icon ?? ""
                         
                         HStack(spacing: 5) {
-                            if icon != nil {
-                                Text(String(describing: icon!)).font(.iconfont(size: 14))
-                            }
+                            IconView(_icon.isEmpty ? issuer.lowercased() : _icon)
                             Text(issuer)
                                 .lineLimit(1)
                                 .font(.system(size: 11, weight: .light))
@@ -182,7 +180,7 @@ struct CodeItemView: View {
                     let issuer = item.issuer ?? ""
                     let icon = getSafeIcon(icon: item.icon, issuer: issuer)
                     
-                    self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), issuer, icon?.rawValue)
+                    self.edit = (item.remark ?? "", Int(item.counter), Int(item.period), issuer, icon?.text)
                     showView.edit = true
                 }
             }
@@ -199,7 +197,9 @@ struct CodeItemView: View {
                 Form {
                     TextField("remark", text: $edit.remark)
                     TextField("issuer", text: $edit.issuer)
-                    GridPickerView(selection: $edit.icon)
+                    LabeledContent("icon") {
+                        IconPickerView(selection: $edit.icon)
+                    }
                     if item.factor == "hotp" {
                         TextField("counter", value: $edit.counter, formatter: NumberFormatter())
                     } else {

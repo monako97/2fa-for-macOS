@@ -1,12 +1,12 @@
 //
 //  FontRegistering.swift
-//  Auth2FA
+//  CodeSnippet
 //
 //  Created by neko Mo on 2023/1/9.
 //
 import SwiftUI
 
-let fontFiles = ["iconfont"]
+let fontFiles = ["iconfont.0","iconfont.1"]
 
 final class FontRegistering {
     static let shared = FontRegistering()
@@ -22,6 +22,7 @@ final class FontRegistering {
         let fontDatas = fontFiles
             .compactMap { Bundle(for: Self.self).url(forResource: $0, withExtension: "woff2") }
             .compactMap { try? Data(contentsOf: $0) }
+        
         for data in fontDatas {
             guard let provider = CGDataProvider(data: data as CFData) else { return }
             guard let font = CGFont(provider) else { return }
@@ -31,7 +32,6 @@ final class FontRegistering {
                     let unError = error?.pointee?.takeUnretainedValue(),
                     let description = CFErrorCopyDescription(unError)
                 else {
-                    print("Unknown error")
                     return
                 }
                 print("Failed to load font: ", description)

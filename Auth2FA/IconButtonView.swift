@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct IconButton<IconView: View>: View {
+struct IconButton<Icon: View>: View {
     @State var isHovered: Bool = false
-    let option: (icon: IconView, hoverIcon: IconView, action: () -> Void)
-    init(_ icon: IconView, _ hoverIcon: IconView? = nil, action: (() -> ())? = nil) {
+    let option: (icon: Icon, hoverIcon: Icon, action: () -> Void)
+    init(_ icon: Icon, _ hoverIcon: Icon? = nil, action: (() -> ())? = nil) {
         self.option = (icon, hoverIcon ?? icon, action ?? {})
     }
-    init(_ icon: IconView, action: (() -> ())? = nil) {
+    init(_ icon: Icon, action: (() -> ())? = nil) {
         self.option = (icon, icon, action ?? {})
     }
     init(_ icon: String,_ hoverIcon: String? = nil, _ action: (() -> ())? = nil) {
-        self.option = (Image(systemName: icon) as! IconView,Image(systemName: hoverIcon ?? icon) as! IconView,action ?? {})
+        self.option = (Image(systemName: icon) as! Icon,Image(systemName: hoverIcon ?? icon) as! Icon,action ?? {})
     }
     init(_ icon: String, _ action: (() -> ())? = nil) {
-        self.option = (Image(systemName: icon) as! IconView,Image(systemName: icon) as! IconView,action ?? {})
+        self.option = (Image(systemName: icon) as! Icon,Image(systemName: icon) as! Icon,action ?? {})
     }
     var body: some View {
         Button(action: option.action, label: {

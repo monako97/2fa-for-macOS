@@ -20,8 +20,9 @@
 		472ED7D229695CFF00727772 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ED7D129695CFF00727772 /* RingView.swift */; };
 		473C70722966A5D0005A91A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 473C70742966A5D0005A91A0 /* Localizable.strings */; };
 		4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4778AA9529791B9F0001134E /* GridPickerView.swift */; };
-		477C6568296B0ADB00A01DDE /* Iconfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477C6567296B0ADB00A01DDE /* Iconfont.swift */; };
-		479927272C2518B500C2ECE4 /* iconfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 479927252C25189A00C2ECE4 /* iconfont.woff2 */; };
+		479927292C25253A00C2ECE4 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479927282C25253A00C2ECE4 /* IconView.swift */; };
+		4799272E2C2529E900C2ECE4 /* iconfont.0.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 4799272D2C2529E900C2ECE4 /* iconfont.0.woff2 */; };
+		479927302C252AA900C2ECE4 /* iconfont.1.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 4799272F2C252AA900C2ECE4 /* iconfont.1.woff2 */; };
 		47AF9BFE2943954B00E6E165 /* Auth2FAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */; };
 		47AF9C022943954B00E6E165 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AF9C012943954B00E6E165 /* Assets.xcassets */; };
 		47AF9C102943954B00E6E165 /* Auth2FATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF9C0F2943954B00E6E165 /* Auth2FATests.swift */; };
@@ -109,10 +110,11 @@
 		47424C6C2B44FDA100F0D0A4 /* Auth2FATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Auth2FATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47424C6D2B44FDA100F0D0A4 /* Auth2FAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Auth2FAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4778AA9529791B9F0001134E /* GridPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPickerView.swift; sourceTree = "<group>"; };
-		477C6567296B0ADB00A01DDE /* Iconfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iconfont.swift; sourceTree = "<group>"; };
 		477C6569296B12FE00A01DDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		479927222C2515C700C2ECE4 /* Auth2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auth2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		479927252C25189A00C2ECE4 /* iconfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.woff2; sourceTree = "<group>"; };
+		479927282C25253A00C2ECE4 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		4799272D2C2529E900C2ECE4 /* iconfont.0.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.0.woff2; sourceTree = "<group>"; };
+		4799272F2C252AA900C2ECE4 /* iconfont.1.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.1.woff2; sourceTree = "<group>"; };
 		47AF9BFD2943954B00E6E165 /* Auth2FAApp.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = Auth2FAApp.swift; sourceTree = "<group>"; };
 		47AF9C012943954B00E6E165 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47AF9C042943954B00E6E165 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -182,7 +184,7 @@
 				472ED7C92967FF3A00727772 /* Data.swift */,
 				472ED7CB2967FF6700727772 /* Array.swift */,
 				472ED7CD2968013C00727772 /* Int.swift */,
-				477C6567296B0ADB00A01DDE /* Iconfont.swift */,
+				479927282C25253A00C2ECE4 /* IconView.swift */,
 				47DA8E09296BFDD200CD9696 /* FontRegistering.swift */,
 				47C1A50C2974167100B8AFB4 /* CancelAll.swift */,
 				47F4FAFF2BDE2D070048D6BC /* HighPerformanceShadow.swift */,
@@ -197,6 +199,15 @@
 				47EE4F1C2962F4F40071ED4F /* QRCode.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		4799272A2C2529B600C2ECE4 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4799272D2C2529E900C2ECE4 /* iconfont.0.woff2 */,
+				4799272F2C252AA900C2ECE4 /* iconfont.1.woff2 */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		47AF9BF12943954A00E6E165 = {
@@ -215,6 +226,7 @@
 		47AF9BFC2943954B00E6E165 /* Auth2FA */ = {
 			isa = PBXGroup;
 			children = (
+				4799272A2C2529B600C2ECE4 /* fonts */,
 				472ED7D52969B73400727772 /* utils */,
 				472ED7D42969B71F00727772 /* extension */,
 				47EE4F192962C1480071ED4F /* CoreData */,
@@ -239,7 +251,6 @@
 				4708D6C72B3E6FF80083D4DE /* BatteryIconView.swift */,
 				4708D6C92B3E7A670083D4DE /* AdapterDetailView.swift */,
 				4708D6CB2B3E96A30083D4DE /* BatteryHealthIconView.swift */,
-				479927252C25189A00C2ECE4 /* iconfont.woff2 */,
 			);
 			path = Auth2FA;
 			sourceTree = "<group>";
@@ -405,8 +416,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				479927272C2518B500C2ECE4 /* iconfont.woff2 in Resources */,
 				473C70722966A5D0005A91A0 /* Localizable.strings in Resources */,
+				479927302C252AA900C2ECE4 /* iconfont.1.woff2 in Resources */,
+				4799272E2C2529E900C2ECE4 /* iconfont.0.woff2 in Resources */,
 				47AF9C022943954B00E6E165 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,12 +447,12 @@
 				47DA8E0A296BFDD200CD9696 /* FontRegistering.swift in Sources */,
 				47C1A50D2974167100B8AFB4 /* CancelAll.swift in Sources */,
 				4708D6C22B3BCCD50083D4DE /* BatteryView.swift in Sources */,
+				479927292C25253A00C2ECE4 /* IconView.swift in Sources */,
 				47C1A5112974291000B8AFB4 /* TimeModel.swift in Sources */,
 				4708D6CC2B3E96A30083D4DE /* BatteryHealthIconView.swift in Sources */,
 				4708D6C02B3ABC620083D4DE /* Battery.swift in Sources */,
 				472ED7D229695CFF00727772 /* RingView.swift in Sources */,
 				47E7D461296183900075833E /* BlurBackground.swift in Sources */,
-				477C6568296B0ADB00A01DDE /* Iconfont.swift in Sources */,
 				47F4FB002BDE2D070048D6BC /* HighPerformanceShadow.swift in Sources */,
 				4778AA9629791B9F0001134E /* GridPickerView.swift in Sources */,
 				47E7D45F29616EFF0075833E /* SettingModel.swift in Sources */,
@@ -649,7 +661,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;
@@ -688,7 +700,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Auth2FA/Preview Content\"";
 				DEVELOPMENT_TEAM = V325FUHP2X;

@@ -55,14 +55,13 @@ struct QRCodeScannerView: View {
                     Divider()
                     HStack {
                         HStack {
-                            if let icon = Iconfont(rawValue: app.addItem.issuer.lowercased()) {
-                                Text(String(describing: icon)).font(.iconfont(size: 14))
+                            if !app.addItem.issuer.isEmpty {
+                                IconView(app.addItem.issuer.lowercased())
                                     .onAppear {
                                         app.addItem.icon = ""
                                     }
                             } else {
-                                GridPickerView(selection: $app.addItem.icon, size: 14)
-                                    .labelsHidden()
+                                IconPickerView(selection: $app.addItem.icon)
                             }
                         }
                         Divider().frame(height: 14)
