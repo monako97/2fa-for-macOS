@@ -2,9 +2,11 @@
 
 使用Swift UI开发的身份验证器(2FA)
 
-[![download](https://user-images.githubusercontent.com/37590873/219133640-8b7a0179-20a7-4e02-8887-fbbd2eaad64b.png)](https://apps.apple.com/cn/app/auth2fa/id1662505539?mt=12)
+[![download](https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/en-us?size=250x83&amp;releaseDate=1672790400)](https://apps.apple.com/us/app/auth2fa/id1662505539?mt=12&amp;itsct=apps_box_badge&amp;itscg=30200)
 
-1. 无依赖, 极简, 软件大小仅800+k
+[![download](https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/zh-cn?size=250x83&amp;releaseDate=1672790400)](https://apps.apple.com/us/app/auth2fa/id1662505539?mt=12&amp;itsct=apps_box_badge&amp;itscg=30200)
+
+1. 无依赖, 极简, 无权限
 2. 不可视时无功耗(♻️)
 3. iCloud同步数据
 4. 二维码导入
