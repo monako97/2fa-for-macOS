@@ -59,8 +59,10 @@ struct HomeView: View {
             .padding(.bottom, 10)
         }
         .onDrop(of: [.plainText, .image], isTargeted: $dragOver) { providers -> Bool in
-            if let provider = providers.first(where: { $0.hasItemConformingToTypeIdentifier("public.png") } ) {
-                provider.loadItem(forTypeIdentifier: "public.png", options: nil) { item, error in
+            if let provider = providers.first(where: {
+                !$0.registeredTypeIdentifiers.isEmpty && $0.registeredTypeIdentifiers[0].contains(/\.(png|jpeg|jpg|gif|webp)$/.ignoresCase(true))
+            }) {
+                provider.loadItem(forTypeIdentifier: provider.registeredTypeIdentifiers[0], options: nil) { item, error in
                     DispatchQueue.main.sync {
                         app.setDropImageData(item as! URL)
                     }

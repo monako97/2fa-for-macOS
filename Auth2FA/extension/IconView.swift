@@ -53,6 +53,7 @@ let iconfontOne = convertIconfont([
 
 // iconfont.1.woff2
 let iconfontTwo = convertIconfont([
+    "nil": "e603",
     "atlassian": "e600",
     "alist": "e644",
     "tencent cloud services": "e6de",
@@ -83,7 +84,8 @@ struct IconView: View {
             Text(icon)
                 .font(.custom("auth2fa-2 Regular", size: size))
         } else {
-            Image(systemName: normalIcon)
+            Text(iconfontTwo["nil"]!)
+                .font(.custom("auth2fa-2 Regular", size: size))
         }
     }
 }
