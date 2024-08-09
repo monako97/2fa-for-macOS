@@ -154,10 +154,12 @@ final class BatteryModel: NSObject, ObservableObject {
         
         self.keys.forEach({ key in
             let val = IORegistryEntryCreateCFProperty(platformExpert,
-                                                      key as CFString,
-                                                      kCFAllocatorDefault, 0).takeRetainedValue()
+                                                       key as CFString,
+                                                       kCFAllocatorDefault, 0)?.takeRetainedValue();
             
-            result.updateValue(val as! CustomStringConvertible, forKey: key)
+            if val != nil {
+                result.updateValue(val as! CustomStringConvertible, forKey: key)
+            }
         })
         return result
     }
