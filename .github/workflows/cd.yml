@@ -1,0 +1,43 @@
+name: Xcode - Build and Analyze
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and analyse default scheme using xcodebuild command
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: hurbes/swift-app-pipeline-action@v0.0.15
+        with:
+          # Required inputs
+          project-name: 'Auth2FA'
+          scheme-name: 'Auth2FA'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Optional inputs (showing default values)
+          xcode-version: 'latest'
+          macos-version: 'latest'
+          run-lint: 'true'
+          run-tests: 'true'
+          run-build: 'true'
+          # 创建一个新的 GitHub 版本并附加您的应用（以 ZIP 或 DMG 格式）。这就像为您的应用举办发布会一样，但完全自动化！
+          # create-release: 'true'
+          # 自动提升您的版本号，无需您手动操作。就像拥有一个精巧、贴心的版本管理器！
+          # increment-build-version: 'true'
+          # 在您的 PR 上留下评论，详细说明新版本。无需额外努力，即可让您的团队随时了解最新动态！
+          comment-on-pr: 'true'
+          pr-comment-template: 'New build {build-number} is ready! Download: {release-url}'
+          # 将您的应用打包成精美的 DMG 文件，非常适合在 App Store 之外发布。自定义背景让您的应用看起来更专业！
+          create-dmg: 'true'
+          # # 使用 Apple 的公证服务对您的应用进行公证，确保它可以在 macOS 上运行而不会出现安全警告。
+          # sign-app: 'true'
+          # enable-notarization: 'true'
+          # apple-id: ${{ secrets.APPLE_ID }}
+          # team-id: ${{ secrets.TEAM_ID }}
+          # apple-password: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
